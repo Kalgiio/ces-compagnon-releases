@@ -1,0 +1,47 @@
+[package]
+name = "ces-compagnon"
+version = "1.0.0"
+description = "CES Compagnon — application de bureau de l'organisation CES (outil de fans non affilié à CIG)"
+authors = ["Kalgiio"]
+edition = "2021"
+publish = false
+
+[lib]
+name = "ces_compagnon_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "unstable"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Liste des processus Windows (savoir si StarCitizen.exe tourne) — rien d'autre : ni mémoire, ni injection.
+sysinfo = { version = "0.33", default-features = false, features = ["system"] }
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+sclog = { version = "0.1.0", path = "../../crates/sclog" }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "multipart", "rustls-tls"] }
+keyring = { version = "3", features = ["windows-native"] }
+tauri-plugin-opener = "2"
+rusqlite = { version = "0.42.0", features = ["bundled"] }
+uuid = { version = "1.29.2", features = ["v4", "v5"] }
+sha1 = "0.11.0"
+quick-xml = "0.42.0"
+tauri-plugin-dialog = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-global-shortcut = "2"
+base64 = "0.22"
+# Discord Rich Presence par le canal local du client Discord (tube nommé), jamais par le jeu.
+discord-rich-presence = "0.2"
+# Avatar des notifications : décodé (PNG, JPEG, WebP, GIF) et réduit en PNG 96 px pour le toast Windows.
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp", "gif"] }
+windows = { version = "0.62", features = ["Media_Ocr", "Graphics_Imaging", "Security_Cryptography", "Storage_Streams", "Foundation", "Foundation_Collections", "Globalization", "Win32_Graphics_Gdi", "Win32_UI_WindowsAndMessaging", "Win32_Foundation", "UI_Notifications", "Data_Xml_Dom", "Win32_UI_Shell", "Win32_System_Com"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

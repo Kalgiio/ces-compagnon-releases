@@ -1,0 +1,329 @@
+/* Habillage de CES Compagnon (21/11) — disposition « HUD » (visière, rail, tuiles, fenêtres flottantes, fond photo)
+   dessinée avec Aurore Design : jetons --ds-*, arrondis --ds-radius-*, DM Sans, dégradé aurore pour les accents
+   (retour du CES : la 0.15.0 « ne respectait pas Aurora Design » — plus d'angles droits, de crochets ni de cyan maison).
+   Règle GPU : pas de backdrop-filter sur ce qui est fixe, animations en transform / opacity. */
+.cmp-hud {
+  --hud-verre: color-mix(in srgb, var(--ds-surface-card) 80%, transparent);
+  --hud-verre-fort: color-mix(in srgb, var(--ds-surface-overlay, var(--ds-surface-card)) 97%, transparent);
+  --hud-voile: linear-gradient(180deg, rgba(5, 5, 17, .42), rgba(5, 5, 17, .74));
+  --hud-aurore: var(--ds-aurora, linear-gradient(90deg, #a78bfa, #5b8def, #67d4fb));
+  background: var(--hud-voile), var(--hud-fond, none) center / cover no-repeat, var(--ds-surface-ground);
+}
+:root[data-mui-color-scheme='light'] .cmp-hud { --hud-voile: linear-gradient(180deg, rgba(232, 236, 255, .58), rgba(232, 236, 255, .84)); }
+.cmp-hud--sans-fond { background: var(--ds-surface-ground); }
+
+/* --- Visière (barre du haut) ------------------------------------------------------------------------------------ */
+.hud-visiere { height: 54px; gap: 12px; position: relative; background: var(--hud-verre-fort); }
+.hud-visiere::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--hud-aurore); opacity: .55; }
+.hud-sous-titre { font: 500 var(--ds-text-xs) var(--ds-font); color: var(--ds-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hud-puce { display: inline-flex; align-items: center; padding: 3px 10px; border: 1px solid var(--ds-border); border-radius: var(--ds-radius-pill); background: var(--ds-surface-sunken); white-space: nowrap; }
+.hud-horloge { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; white-space: nowrap; font-family: var(--ds-font); }
+.hud-horloge strong { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.hud-horloge small { font-size: 10.5px; color: var(--ds-text-muted); font-variant-numeric: tabular-nums; }
+.hud-actions { display: flex; align-items: center; gap: 8px; }
+.hud-rsi-zone, .hud-sos-zone { position: relative; display: inline-flex; }
+.hud-rsi { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px; border-radius: var(--ds-radius-pill); cursor: pointer;
+  border: 1px solid var(--ds-border-strong); background: var(--ds-surface-sunken); color: var(--ds-text); font: 600 var(--ds-text-sm) var(--ds-font); }
+.hud-rsi:hover { background: var(--ds-surface-hover); border-color: var(--ds-primary); }
+.hud-rsi:focus-visible, .hud-sos:focus-visible { outline: 2px solid var(--ds-primary); outline-offset: 2px; }
+.hud-rsi__logo { display: inline-flex; }
+.hud-rsi__logo svg { height: 12px; width: auto; display: block; }
+.hud-sos { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; border-radius: var(--ds-radius-pill); cursor: pointer;
+  border: 1px solid var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 16%, transparent); color: var(--ds-danger); font: 800 var(--ds-text-sm) var(--ds-font); letter-spacing: .08em;
+  user-select: none; -webkit-user-select: none; touch-action: none; }
+.hud-sos:hover { background: color-mix(in srgb, var(--ds-danger) 26%, transparent); }
+.hud-sos > :not(.hud-sos__jauge) { position: relative; }
+.hud-sos__jauge { position: absolute; inset: 0; background: var(--ds-danger); transform: scaleX(0); transform-origin: left; transition: transform .15s ease-out; }
+.hud-sos.is-charge .hud-sos__jauge { transform: scaleX(1); transition: transform 1s linear; }
+.hud-sos.is-charge { color: var(--ds-on-danger, #fff); }
+.hud-sos.is-mien { animation: hud-sos-pouls 1.6s ease-in-out infinite; }
+@keyframes hud-sos-pouls { 50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ds-danger) 35%, transparent); } }
+.hud-sos__nb { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--ds-danger); color: var(--ds-on-danger, #fff); font: 700 11px/18px var(--ds-font); letter-spacing: 0; font-style: normal; text-align: center; }
+.hud-bulle { position: absolute; top: calc(100% + 8px); right: 0; z-index: 4600; width: max-content; max-width: 320px; padding: 8px 12px; border-radius: var(--ds-radius-md);
+  background: var(--hud-verre-fort); border: 1px solid var(--ds-border-strong); color: var(--ds-text); font: 500 var(--ds-text-sm) var(--ds-font); box-shadow: var(--ds-shadow-md); }
+.hud-bulle.is-erreur { border-color: var(--ds-danger); }
+
+/* --- Corps : rail + contenu (le rail reprend la barre latérale du portail, DS-CES-11) ------------------------------ */
+.hud-corps { flex: 1; min-height: 0; display: flex; position: relative; }
+.hud-corps > .cmp-main { flex: 1; min-width: 0; }
+.hud-rail { position: relative; z-index: 20; flex: none; width: 84px; display: flex; flex-direction: column; background: var(--hud-verre); border-right: 1px solid var(--ds-border); }
+.hud-rail__defil { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 8px 6px; scrollbar-width: none; }
+.hud-rail__defil::-webkit-scrollbar { display: none; }
+.hud-rail__groupe { display: flex; flex-direction: column; gap: 2px; }
+.hud-rail__sep { display: block; height: 1px; margin: 8px 12px; background: var(--ds-border-strong); }
+.hud-rail__lien { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px 7px; border: 0; border-radius: 10px; background: none;
+  color: var(--ds-text-muted); cursor: pointer; font: 600 10.5px var(--ds-font); transition: background .15s, color .15s; }
+.hud-rail__lien:hover { color: var(--ds-text); background: var(--ds-surface-hover); }
+.hud-rail__lien.is-actif { color: var(--ds-text); background: linear-gradient(180deg, color-mix(in srgb, var(--ds-primary) 18%, transparent), transparent 120%); }
+.hud-rail__lien.is-actif svg { color: var(--ds-primary); }
+.hud-rail__lien.is-actif::before { content: ''; position: absolute; left: -6px; top: 10px; bottom: 10px; width: 3px; border-radius: 3px;
+  background: linear-gradient(180deg, var(--ces-aurora-cyan, #67d4fb), var(--ces-aurora-violet, #a78bfa)); box-shadow: 0 0 10px var(--ces-aurora-violet, #a78bfa); }
+.hud-rail__lien:focus-visible { outline: 2px solid var(--ds-primary); outline-offset: -2px; }
+.hud-rail__txt { max-width: 74px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hud-rail__compte { border-top: 1px solid var(--ds-border); padding: 6px; }
+.hud-rail__compte .ds-pop { display: flex; width: 100%; }
+.hud-rail__compte .ds-pop__panel { z-index: 4400; top: auto !important; bottom: 0; left: calc(100% + 8px) !important; right: auto !important;
+  background: var(--hud-verre-fort); border: 1px solid var(--ds-border-strong); border-radius: var(--ds-radius-md); box-shadow: var(--ds-shadow-lg); }
+.hud-rail__avatar { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; font: 700 12px var(--ds-font); color: #fff; background: var(--hud-aurore); }
+
+/* --- Contenu ------------------------------------------------------------------------------------------------------ */
+.cmp-hud .cmp-main:not(.cmp-main--portail),
+:root[data-mui-color-scheme='light'] .cmp-hud .cmp-main:not(.cmp-main--portail) { background: none; }
+.cmp-hud .cmp-main--plein { background: var(--hud-verre); }
+.cmp-hud .ds-panel { background: var(--hud-verre); box-shadow: var(--ds-shadow-sm); }
+.cmp-hud .dsn-hero { background: var(--hud-verre); }
+.cmp-hud .cmp-page { max-width: 1400px; }
+
+/* --- Tableau de bord en tuiles ------------------------------------------------------------------------------------ */
+.hud-tdb { display: flex; flex-direction: column; gap: 10px; }
+.hud-tdb__outils { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
+.hud-titre { display: inline-flex; align-items: center; gap: 6px; margin: 0; font: 600 var(--ds-text-xs) var(--ds-font); color: var(--ds-text-muted); }
+.hud-tdb__ajouts { display: flex; flex-wrap: wrap; gap: 4px; }
+.hud-grille { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: var(--rang); gap: var(--ecart); }
+.hud-grille.is-etroite { display: flex; flex-direction: column; }
+.hud-tuile { position: relative; min-width: 0; min-height: 0; display: flex; }
+.hud-tuile > :first-child { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.hud-tuile .ds-panel { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.hud-tuile .ds-panel__body { flex: 1; min-height: 0; overflow: auto; }
+.hud-grille:not(.is-etroite) .hud-tuile .ds-panel__head { cursor: grab; user-select: none; -webkit-user-select: none; padding-right: 36px; }
+.hud-tuile.is-geste { opacity: .5; }
+.hud-tuile.is-geste .ds-panel__head { cursor: grabbing; }
+.hud-tuile-apercu { border: 2px dashed var(--ds-primary); border-radius: var(--ds-radius-lg); background: var(--ds-primary-soft, color-mix(in srgb, var(--ds-primary) 10%, transparent)); pointer-events: none; z-index: 3; }
+.hud-tuile__cacher { position: absolute; top: 9px; right: 9px; z-index: 2; width: 24px; height: 24px; display: grid; place-items: center; border: 0; border-radius: var(--ds-radius-sm);
+  background: none; color: var(--ds-text-muted); cursor: pointer; opacity: 0; transition: opacity .15s; }
+.hud-tuile:hover .hud-tuile__cacher, .hud-tuile__cacher:focus-visible { opacity: 1; }
+.hud-tuile__cacher:hover { color: var(--ds-text); background: var(--ds-surface-hover); }
+.hud-tuile__taille { position: absolute; right: 4px; bottom: 4px; z-index: 2; width: 14px; height: 14px; cursor: nwse-resize; opacity: .45; border-radius: 0 0 var(--ds-radius-md) 0;
+  border-right: 2px solid var(--ds-primary); border-bottom: 2px solid var(--ds-primary); }
+.hud-tuile:hover .hud-tuile__taille { opacity: 1; }
+.hud-tuile .cmp-visite-cible { display: flex; flex-direction: column; }
+
+/* --- Fenêtre flottante ------------------------------------------------------------------------------------------- */
+.hud-fenetre { position: fixed; z-index: 4500; max-height: calc(100vh - 70px); display: flex; flex-direction: column; border-radius: var(--ds-radius-lg); overflow: hidden;
+  background: var(--hud-verre-fort); border: 1px solid var(--ds-border-strong); box-shadow: var(--ds-shadow-lg); animation: hud-ouvre .2s ease-out; }
+@keyframes hud-ouvre { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
+.hud-fenetre__barre { display: flex; align-items: center; gap: 8px; padding: 9px 9px 9px 12px; cursor: grab; user-select: none; -webkit-user-select: none;
+  border-bottom: 1px solid var(--ds-border); font: 700 var(--ds-text-sm) var(--ds-font); color: var(--ds-text); }
+.hud-fenetre__barre:active { cursor: grabbing; }
+.hud-fenetre__barre > svg:first-child { color: var(--ds-text-muted); }
+.hud-fenetre__barre strong { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hud-fenetre__fermer { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: var(--ds-radius-sm); background: none; color: var(--ds-text-muted); cursor: pointer; }
+.hud-fenetre__fermer:hover { background: var(--ds-surface-hover); color: var(--ds-text); }
+.hud-fenetre__corps { overflow-y: auto; padding: 14px; }
+.hud-fenetre--danger { border-color: color-mix(in srgb, var(--ds-danger) 60%, transparent); }
+.hud-fenetre--danger .hud-fenetre__barre { color: var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 10%, transparent); }
+@media (prefers-reduced-motion: reduce) { .hud-fenetre, .hud-sos.is-mien { animation: none; } .hud-sos.is-charge .hud-sos__jauge { transition: none; } }
+
+/* --- SOS ---------------------------------------------------------------------------------------------------------- */
+.hud-sos-panneau { display: flex; flex-direction: column; gap: 12px; }
+.hud-alertes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.hud-alerte { padding: 10px 12px; border-radius: var(--ds-radius-md); border: 1px solid color-mix(in srgb, var(--ds-danger) 40%, transparent); background: color-mix(in srgb, var(--ds-danger) 7%, transparent); }
+.hud-alerte.is-mienne { border-color: var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 13%, transparent); }
+.hud-alertes--resume .hud-alerte { padding: 7px 10px; }
+.hud-alerte__tete { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.hud-alerte__tete strong { font-size: 13.5px; }
+.hud-alerte__tete time { margin-left: auto; font-size: 11.5px; color: var(--ds-text-muted); font-variant-numeric: tabular-nums; }
+.hud-alerte__type { font: 700 var(--ds-text-xs) var(--ds-font); color: var(--ds-danger); }
+.hud-alerte__lieu { display: flex; align-items: center; gap: 4px; margin: 6px 0 0; font-size: 12.5px; }
+.hud-alerte__msg { margin: 6px 0 4px; font-size: 13px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.hud-alerte .cmp-actions { margin-top: 8px; }
+.hud-sos-nouveau { display: flex; flex-direction: column; gap: 8px; }
+.hud-sos-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.hud-sos-type { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: var(--ds-radius-md); cursor: pointer;
+  border: 1px solid var(--ds-border); background: var(--ds-surface-sunken); color: var(--ds-text-muted); font: 600 12.5px var(--ds-font); }
+.hud-sos-type:hover { color: var(--ds-text); border-color: var(--ds-border-strong); }
+.hud-sos-type.is-actif { color: var(--ds-text); border-color: var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 14%, transparent); box-shadow: inset 0 0 0 1px var(--ds-danger); }
+.hud-saisie { width: 100%; box-sizing: border-box; resize: vertical; min-height: 56px; padding: 8px 11px; border-radius: var(--ds-radius-md); border: 1px solid var(--ds-border);
+  background: var(--ds-surface-sunken); color: var(--ds-text); font: 13px/1.45 var(--ds-font); }
+.hud-saisie:focus { outline: 2px solid color-mix(in srgb, var(--ds-primary) 60%, transparent); outline-offset: 0; }
+.hud-confirmer { padding: 10px 12px; border-radius: var(--ds-radius-md); border: 1px solid var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 9%, transparent); }
+.hud-confirmer p { margin: 0; font-size: 13px; }
+.hud-sos-recents summary { cursor: pointer; color: var(--ds-text-muted); }
+.hud-sos-recents ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.hud-sos-recents li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--ds-border); }
+
+/* --- Choix du fond ------------------------------------------------------------------------------------------------ */
+.hud-fonds { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.hud-fond { display: flex; flex-direction: column; gap: 6px; padding: 6px; border-radius: var(--ds-radius-md); cursor: pointer; border: 1px solid var(--ds-border); background: var(--ds-surface-sunken); color: var(--ds-text-muted); font: 500 12px var(--ds-font); text-align: left; }
+.hud-fond:hover { border-color: var(--ds-border-strong); color: var(--ds-text); }
+.hud-fond.is-actif { border-color: var(--ds-primary); color: var(--ds-text); box-shadow: 0 0 0 1px var(--ds-primary); }
+.hud-fond__img { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: var(--ds-radius-sm); background: var(--ds-surface-card) center / cover no-repeat; color: var(--ds-text-muted); }
+
+/* Fenêtre étroite : rail plus fin, sans libellés */
+@media (max-width: 760px) {
+  .hud-rail { width: 58px; }
+  .hud-rail__txt { display: none; }
+  .hud-horloge, .hud-puce, .hud-sous-titre { display: none; }
+}
+
+/* --- Radio du CES (vinyle de la navigation + fenêtre) -------------------------------------------------------------- */
+.rad-nav { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0; }
+.rad-disque { width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; background: none; }
+.rad-disque__vinyle { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: repeating-radial-gradient(circle, #15151c 0 2px, #22222c 2px 3px); box-shadow: 0 0 0 1px var(--ds-border-strong), inset 0 0 0 1px rgba(255, 255, 255, .06); }
+.rad-nav.is-on .rad-disque__vinyle, .rad-grand.is-on .rad-pochette { animation: rad-tourne 3.2s linear infinite; }
+@keyframes rad-tourne { to { transform: rotate(360deg); } }
+.rad-pochette { border-radius: 50%; object-fit: cover; display: grid; place-items: center; font: 800 8px var(--ds-font); color: #fff; background: var(--hud-aurore); }
+.rad-nav__lecture { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--ds-border-strong); border-radius: 50%; background: var(--ds-surface-sunken); color: var(--ds-text); cursor: pointer; }
+.rad-nav__lecture:hover { border-color: var(--ds-primary); color: var(--ds-primary); }
+.rad-panneau { display: flex; flex-direction: column; gap: 10px; }
+.rad-tete { display: flex; align-items: center; gap: 14px; }
+.rad-grand { flex: none; width: 82px; height: 82px; border-radius: 50%; display: grid; place-items: center; background: repeating-radial-gradient(circle, #15151c 0 2px, #22222c 2px 3px); }
+.rad-grand .rad-pochette { width: 46px !important; height: 46px !important; font-size: 11px; }
+.rad-tete__txt { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.rad-tete__txt strong { font: 700 15px var(--ds-font); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rad-direct { display: inline-flex; align-items: center; gap: 6px; font: 700 10.5px var(--ds-font-mono, monospace); letter-spacing: .12em; color: var(--ds-danger); }
+.rad-direct i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: hud-sos-pouls 1.6s infinite; }
+.rad-sillon { height: 42px; display: flex; align-items: center; gap: 2px; }
+.rad-sillon i { flex: 1; border-radius: 2px; background: var(--ds-border-strong); }
+.rad-sillon i.is-passe { background: var(--ds-primary); }
+.rad-temps { display: flex; justify-content: space-between; margin-top: -6px; font-variant-numeric: tabular-nums; }
+.rad-commandes { display: flex; align-items: center; gap: 10px; }
+.rad-muet { width: 30px; height: 30px; display: grid; place-items: center; border: 0; border-radius: var(--ds-radius-sm); background: none; color: var(--ds-text-muted); cursor: pointer; }
+.rad-muet:hover { background: var(--ds-surface-hover); color: var(--ds-text); }
+.rad-volume { flex: 1; accent-color: var(--ds-primary); }
+.rad-erreur { margin: 0; color: var(--ds-danger); }
+.rad-suite { margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 3px; font-size: 13px; }
+.rad-suite li span { margin-right: 6px; }
+@media (prefers-reduced-motion: reduce) { .rad-nav.is-on .rad-disque__vinyle, .rad-grand.is-on .rad-pochette { animation: none; } }
+
+/* =================================================================================================================
+   « Console tactique » (choix du CES, 23/11) : compact et chiffré, pensé pour un deuxième écran à côté du jeu.
+   Toujours Aurore Design (jetons --ds-*) ; densité resserrée, étiquettes en capitales monospace, chiffres alignés.
+   ================================================================================================================= */
+.cmp-hud { --hud-voile: linear-gradient(180deg, rgba(5, 5, 17, .55), rgba(5, 5, 17, .82)); }
+:root[data-mui-color-scheme='light'] .cmp-hud { --hud-voile: linear-gradient(180deg, rgba(232, 236, 255, .66), rgba(232, 236, 255, .88)); }
+.cmp-hud .cmp-main:not(.cmp-main--portail) { padding: 14px 16px 22px; }
+.cmp-hud .cmp-page { gap: 10px; }
+.cmp-hud .cmp-stack { gap: 10px; }
+.cmp-hud .ds-panel { border-radius: var(--ds-radius-md); }
+.cmp-hud .ds-panel__head { padding: 9px 12px; font: 700 10.5px var(--ds-font-mono, 'Ubuntu Mono', monospace); letter-spacing: .14em; text-transform: uppercase; color: var(--ds-text-muted); }
+.cmp-hud .ds-panel__body { padding: 12px; }
+.cmp-hud .dsn-hero { padding-top: 14px; padding-bottom: 14px; }
+.cmp-hud .cmp-dl { font-size: 12.5px; gap: 3px 12px; }
+.cmp-hud .cmp-dl dt { font: 600 10.5px var(--ds-font-mono, monospace); letter-spacing: .08em; text-transform: uppercase; padding-top: 2px; }
+
+/* Barre du haut : le titre se réduit au lieu d'écraser les boutons (retour du CES, capture du 23/11). */
+.hud-visiere > * { flex-shrink: 0; }
+.hud-visiere .cmp-title { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.hud-visiere .cmp-title strong, .hud-visiere .cmp-title small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 1180px) { .hud-horloge { display: none; } }
+@media (max-width: 1040px) { .hud-puce { display: none; } .hud-rsi > span:not(.hud-rsi__logo) { display: none; } }
+@media (max-width: 900px) { .hud-visiere .cmp-title { display: none; } .cmp-pastille { display: none; } }
+
+/* --- Navigation en haut ou en bas (au choix de chacun : Outils › Interface) ------------------------------------- */
+.hud-corps--haut { flex-direction: column; }
+.hud-corps--bas { flex-direction: column-reverse; }
+.hud-corps--haut .hud-rail, .hud-corps--bas .hud-rail { width: auto; flex-direction: row; align-items: center; border-right: 0; }
+.hud-corps--haut .hud-rail { border-bottom: 1px solid var(--ds-border); }
+.hud-corps--bas .hud-rail { border-top: 1px solid var(--ds-border); }
+.hud-corps--haut .hud-rail__defil, .hud-corps--bas .hud-rail__defil { flex: 1; min-width: 0; display: flex; align-items: center; overflow-x: auto; overflow-y: hidden; padding: 4px 8px; }
+.hud-corps--haut .hud-rail__groupe, .hud-corps--bas .hud-rail__groupe { flex-direction: row; }
+.hud-corps--haut .hud-rail__lien, .hud-corps--bas .hud-rail__lien { flex-direction: row; width: auto; gap: 7px; padding: 7px 11px; font-size: 12px; white-space: nowrap; }
+.hud-corps--haut .hud-rail__txt, .hud-corps--bas .hud-rail__txt { max-width: none; }
+.hud-corps--haut .hud-rail__sep, .hud-corps--bas .hud-rail__sep { width: 1px; height: 22px; margin: 0 6px; flex: none; }
+.hud-corps--haut .hud-rail__lien.is-actif::before, .hud-corps--bas .hud-rail__lien.is-actif::before { left: 12px; right: 12px; top: auto; bottom: -4px; width: auto; height: 3px; background: linear-gradient(90deg, var(--ces-aurora-cyan, #67d4fb), var(--ces-aurora-violet, #a78bfa)); }
+.hud-corps--bas .hud-rail__lien.is-actif::before { bottom: auto; top: -4px; }
+.hud-corps--haut .hud-rail__compte, .hud-corps--bas .hud-rail__compte { border-top: 0; border-left: 1px solid var(--ds-border); padding: 4px 8px; }
+.hud-corps--haut .hud-rail__compte .hud-rail__lien, .hud-corps--bas .hud-rail__compte .hud-rail__lien { padding: 4px 8px; }
+.hud-corps--haut .hud-rail__compte .ds-pop__panel { top: calc(100% + 6px) !important; bottom: auto; left: auto !important; right: 0 !important; }
+.hud-corps--bas .hud-rail__compte .ds-pop__panel { top: auto !important; bottom: calc(100% + 6px); left: auto !important; right: 0 !important; }
+.hud-corps--haut .rad-nav, .hud-corps--bas .rad-nav { padding: 0 6px; }
+.hud-corps--haut .rad-disque, .hud-corps--haut .rad-disque__vinyle, .hud-corps--bas .rad-disque, .hud-corps--bas .rad-disque__vinyle { width: 32px; height: 32px; }
+
+/* --- Accueil « passerelle » ---------------------------------------------------------------------------------------- */
+.psl-mode { display: flex; justify-content: flex-end; }
+.psl { display: flex; flex-direction: column; gap: 10px; }
+.psl-bandeau { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; border-radius: var(--ds-radius-md); overflow: hidden;
+  border: 1px solid var(--ds-border); background: var(--ds-border); }
+.psl-lecture { display: flex; flex-direction: column; gap: 2px; padding: 9px 12px; background: var(--hud-verre-fort, var(--ds-surface-card)); }
+.psl-lecture span { font: 600 10px var(--ds-font-mono, monospace); letter-spacing: .12em; text-transform: uppercase; color: var(--ds-text-muted); }
+.psl-lecture strong { font: 800 17px var(--ds-font); font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.psl-lecture--ok strong { color: var(--ds-success, #34d399); }
+.psl-lecture--warn strong { color: var(--ds-warn, #f59e0b); }
+.psl-lecture--danger strong { color: var(--ds-danger, #ef4444); }
+.psl-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; align-items: start; }
+.psl-op { grid-column: span 2; }
+@media (max-width: 760px) { .psl-op { grid-column: auto; } }
+.psl-bloc { display: flex; flex-direction: column; border-radius: var(--ds-radius-md); border: 1px solid var(--ds-border); background: var(--hud-verre, var(--ds-surface-card)); min-width: 0; }
+.psl-bloc__tete { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--ds-border);
+  font: 700 10.5px var(--ds-font-mono, monospace); letter-spacing: .14em; text-transform: uppercase; color: var(--ds-text-muted); }
+.psl-bloc__tete > span { display: inline-flex; align-items: center; gap: 6px; }
+.psl-bloc__corps { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 12px; }
+.psl-bloc__corps p { margin: 0; }
+.psl-lien { border: 0; background: none; padding: 0; color: var(--ds-primary); cursor: pointer; font: 600 11.5px var(--ds-font); letter-spacing: 0; text-transform: none; }
+.psl-op__carte { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 16px; min-height: 140px; justify-content: flex-end; text-align: left; cursor: pointer;
+  border: 0; border-radius: var(--ds-radius-md); color: #f1f3ff; overflow: hidden;
+  background: linear-gradient(180deg, rgba(5, 5, 17, .15), rgba(5, 5, 17, .88)), var(--psl-img, linear-gradient(120deg, #2b2063, #163a6e)) center / cover no-repeat; }
+.psl-op__carte strong { font: 800 19px var(--ds-font); }
+.psl-op__carte > span { font-size: 12.5px; color: rgba(241, 243, 255, .85); }
+.psl-op__compte { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: var(--ds-radius-pill); background: rgba(5, 5, 17, .65);
+  font: 800 13px var(--ds-font-mono, monospace) !important; color: #fff !important; font-variant-numeric: tabular-nums; }
+.psl-op__pied { display: flex; flex-wrap: wrap; gap: 12px; }
+.psl-op__pied > span { display: inline-flex; align-items: center; gap: 4px; }
+.psl-ok { color: #6ee7b7; font-weight: 700; }
+.psl-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.psl-liste button { width: 100%; display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border: 0; border-bottom: 1px dashed var(--ds-border); background: none;
+  color: var(--ds-text); cursor: pointer; font: 13px var(--ds-font); text-align: left; }
+.psl-liste li:last-child button { border-bottom: 0; }
+.psl-liste button span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.psl-liste time { flex: none; font: 600 11.5px var(--ds-font-mono, monospace); color: var(--ds-text-muted); font-variant-numeric: tabular-nums; }
+.psl-danger { color: var(--ds-danger); font-weight: 700; }
+.psl-defcon { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--ds-radius-sm); background: var(--ds-surface-sunken); --c: #22c55e; }
+.psl-defcon--4 { --c: #3b82f6; } .psl-defcon--3 { --c: #ca8a04; } .psl-defcon--2 { --c: #ea580c; } .psl-defcon--1 { --c: #dc2626; }
+.psl-defcon strong { font: 800 26px/1 var(--ds-font); color: var(--c); font-variant-numeric: tabular-nums; }
+.psl-defcon span { font-size: 12.5px; }
+.psl-membres { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+.psl-membres li { display: flex; align-items: center; gap: 7px; font-size: 13px; min-width: 0; }
+.psl-membres li > span:not(.nat-avatar) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.psl-membres small { font: 600 10px var(--ds-font-mono, monospace); color: var(--ds-success, #34d399); text-transform: uppercase; }
+.psl-radio { display: flex; align-items: center; gap: 10px; }
+.psl-radio > span { display: flex; flex-direction: column; min-width: 0; }
+.psl-radio strong { font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.psl-radio__btn { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ds-border-strong); background: var(--ds-surface-sunken); color: var(--ds-text); cursor: pointer; font: 800 13px var(--ds-font); }
+.psl-radio__btn:hover { border-color: var(--ds-primary); color: var(--ds-primary); }
+.psl-outils { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.psl-outils button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: var(--ds-radius-sm); border: 1px solid var(--ds-border);
+  background: var(--ds-surface-sunken); color: var(--ds-text-muted); cursor: pointer; font: 600 11.5px var(--ds-font); }
+.psl-outils button:hover { color: var(--ds-text); border-color: var(--ds-primary); }
+
+.psl-page { display: flex; flex-direction: column; gap: 10px; }
+
+/* 24/11 : étiquette du vinyle centrée, fenêtres flottantes opaques (le texte du dessous ne transparaît plus). */
+.rad-pochette { position: relative; flex: none; display: block; border-radius: 50%; overflow: hidden; background: var(--hud-aurore); }
+.rad-pochette__ces { position: absolute; inset: 0; display: grid; place-items: center; font: 800 8px var(--ds-font); color: #fff; }
+.rad-pochette__img { position: absolute; inset: 0; background: center / cover no-repeat; }
+.rad-grand .rad-pochette__ces { font-size: 11px; }
+.hud-fenetre { background: linear-gradient(var(--hud-verre-fort), var(--hud-verre-fort)), var(--ds-surface-ground); }
+.hud-rail__compte .ds-pop__panel, .hud-bulle { background: linear-gradient(var(--hud-verre-fort), var(--hud-verre-fort)), var(--ds-surface-ground); }
+
+/* --- Clic droit maison (24/11) ------------------------------------------------------------------------------------ */
+.ctx-voile { position: fixed; inset: 0; z-index: 4800; }
+.ctx-menu { position: fixed; z-index: 4801; min-width: 210px; padding: 5px; display: flex; flex-direction: column; border-radius: var(--ds-radius-md);
+  background: linear-gradient(var(--hud-verre-fort), var(--hud-verre-fort)), var(--ds-surface-ground); border: 1px solid var(--ds-border-strong); box-shadow: var(--ds-shadow-lg);
+  animation: hud-ouvre .12s ease-out; }
+.ctx-item { display: flex; align-items: center; gap: 9px; padding: 7px 9px; border: 0; border-radius: var(--ds-radius-sm); background: none; color: var(--ds-text); cursor: pointer; font: 500 13px var(--ds-font); text-align: left; }
+.ctx-item:hover:not(:disabled) { background: var(--ds-surface-hover); }
+.ctx-item:disabled { color: var(--ds-text-disabled, var(--ds-text-muted)); cursor: default; opacity: .55; }
+.ctx-item svg { color: var(--ds-text-muted); flex: none; }
+.ctx-item span { flex: 1; }
+.ctx-item kbd { font: 600 10.5px var(--ds-font-mono, monospace); color: var(--ds-text-muted); }
+.ctx-sep { height: 1px; margin: 4px 6px; background: var(--ds-border); }
+
+/* Sélection de texte réduite : l'interface ne se sélectionne plus ; les contenus à lire ou copier, oui. */
+.cmp-hud { -webkit-user-select: none; user-select: none; }
+.cmp-hud :is(input, textarea, [contenteditable="true"], .nat-md, .nat-bio, .nat-post, .hud-alerte__msg, .cmp-mono, .cmp-code, .cmp-wk-texte, .cmp-dl dd, [data-selectionnable]) { -webkit-user-select: text; user-select: text; }
+
+/* Visionneuse d'images */
+.hud-visio { position: fixed; inset: 0; z-index: 4900; display: grid; place-items: center; padding: 32px; background: rgba(3, 4, 14, .86); cursor: zoom-out; animation: hud-ouvre .15s ease-out; }
+.hud-visio figure { margin: 0; max-width: min(92vw, 1100px); max-height: 88vh; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: default; }
+.hud-visio img { max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: var(--ds-radius-md); box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+.hud-visio figcaption { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #f1f3ff; font: 700 15px var(--ds-font); }
+.hud-visio figcaption small { font: 500 12.5px var(--ds-font); color: rgba(241,243,255,.7); }
+.hud-visio__fermer { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; cursor: pointer; }
+
+/* Blocs de passerelle dans les tuiles : en-tête = poignée, corps qui défile. */
+.hud-tuile > .psl-bloc { flex: 1; min-height: 0; }
+.hud-tuile .psl-bloc__corps { flex: 1; min-height: 0; overflow: auto; }
+.hud-grille:not(.is-etroite) .hud-tuile .psl-bloc__tete { cursor: grab; user-select: none; padding-right: 36px; }
+.hud-tuile .psl-bloc__tete .psl-lien { margin-right: 2px; }

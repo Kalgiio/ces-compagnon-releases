@@ -1,0 +1,10 @@
+[package]
+name = "sclog"
+version = "0.1.0"
+edition = "2021"
+description = "Lecture du Game.log de Star Citizen pour CES Compagnon : découpage des lignes, suivi en direct, événements du joueur local"
+publish = false
+
+[dependencies]
+regex = "1"
+serde = { version = "1", features = ["derive"] }

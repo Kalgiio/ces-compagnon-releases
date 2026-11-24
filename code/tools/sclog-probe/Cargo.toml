@@ -1,0 +1,12 @@
+[package]
+name = "sclog-probe"
+version = "0.1.0"
+edition = "2021"
+description = "Sonde du Game.log de Star Citizen : types d'événements, exemples anonymisés, rapport Markdown (CES Compagnon)"
+publish = false
+
+[dependencies]
+regex = "1"
+
+[profile.release]
+opt-level = 3

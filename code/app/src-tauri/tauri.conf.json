@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "CES Compagnon",
+  "version": "1.0.0",
+  "identifier": "fr.ces-sc.compagnon",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "CES Compagnon",
+        "width": 1120,
+        "height": 760,
+        "minWidth": 440,
+        "minHeight": 560,
+        "resizable": true,
+        "center": true,
+        "decorations": false,
+        "shadow": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: blob: https: http://cesmedia.localhost cesmedia:; media-src 'self' https: http://cesmedia.localhost; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost http://cesmedia.localhost; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEIzNjE3QjgwNjk3QkFBRjMKUldUenFudHBnSHRoczBONlBkM2NRakxXcHl4U0h2bmJjRTV2L2FlZTFCSmgwZzg5eVBZbFJGQ3EK",
+      "endpoints": [
+        "https://github.com/Kalgiio/ces-compagnon-releases/releases/download/canary/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "createUpdaterArtifacts": true,
+    "publisher": "CES — Corps Expéditionnaire Spatial",
+    "shortDescription": "Compagnon de l'organisation CES pour Star Citizen",
+    "longDescription": "Application de l'organisation CES. Outil de fans non affilié à Cloud Imperium Games.",
+    "copyright": "CES Compagnon",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "French"
+        ],
+        "installerHooks": "installer/hooks.nsh",
+        "sidebarImage": "installer/sidebar.bmp",
+        "headerImage": "installer/header.bmp",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/desinstaller.ico"
+      }
+    }
+  }
+}

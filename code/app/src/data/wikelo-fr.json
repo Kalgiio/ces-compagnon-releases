@@ -1,0 +1,380 @@
+{
+ "note": "Traduction française des contrats de Wikelo (titres et textes), rédigée pour CES Compagnon à partir des textes anglais du Star Citizen Wiki. Indexée par identifiant de contrat ; un contrat absent garde son texte anglais.",
+ "contrats": {
+  "956685c4-0324-4cf8-8a67-fed823254e61": {
+   "titre": "L'aventure en Venture",
+   "description": "Tu aimes l'aventure, n'est-ce pas ? Cette armure est faite pour ça. Elle te laisse aller dans des endroits dangereux, sans être trop lourde. Reste léger. Wikelo a trouvé ces pièces et les échange si tu veux. Tu gagnes, Wikelo gagne. Au revoir.",
+   "titre_en": "Adventure a A-Venture"
+  },
+  "eda899b9-c58b-48df-88d9-6b34368af2f2": {
+   "titre": "Armure à corne et à corde",
+   "description": "Bonjour. Wikelo sait que beaucoup d'humains veulent du saldynium pour leurs soucis de régénération. Les crédits, c'est bien, oui, mais Wikelo peut s'en servir, avec de la corne de kopion et d'autres choses, pour faire une armure spéciale.\n\nUne fois finie, tu seras très solide. Très effrayant.\n\nTu vois les objets nécessaires. Apporte-les à l'Emporium de Wikelo et je la fabrique pour toi.\n\nAu revoir.",
+   "titre_en": "Armor with horn and string"
+  },
+  "372b0eff-0e55-4654-a3ca-542058cb84cf": {
+   "titre": "Armure à la Vanduul",
+   "description": "Les Vanduul ont des manières étranges. Wikelo ne leur parle jamais ; l'ancien souli le faisait, pas Wikelo. Pas amicaux, mais ils fabriquent des choses intéressantes. Si tu veux, Wikelo peut te faire leur ressembler un peu plus.\n\nApporte les choses. Je le fais.\n\nAu revoir.",
+   "titre_en": "Armor with Vanduul"
+  },
+  "5bf19672-f057-4ccf-bdd4-d309edfeea15": {
+   "titre": "Asgard modifié pour le combat",
+   "description": "Wikelo a modifié l'Asgard pour qu'il se batte davantage. Si tu vas au combat, c'est cette version qu'il te faut. Et l'échange est avantageux. Apporte simplement les objets ici et je te donne le vaisseau.",
+   "titre_en": "Asgard Fight Mod"
+  },
+  "2fba83a9-7652-40a7-b761-1cf8651bbc34": {
+   "titre": "ATLS couleur métal refroidi",
+   "description": "Wikelo donne des couleurs rouge profond et vert pour que les jambes de l'ATLS aient l'air de refroidir après la chaleur. Très joli.",
+   "titre_en": "ATLS Cool Metal Color"
+  },
+  "7649f7a6-e0e0-44b5-87bc-803d6052c9f8": {
+   "titre": "ATLS couleur pays des neiges",
+   "description": "Wikelo a voyagé sur une planète humaine très froide, mais très jolie. Ces couleurs la rappellent.",
+   "titre_en": "ATLS Snowland Color"
+  },
+  "b46612e0-4eae-4827-8038-e460e00f8967": {
+   "titre": "Mitrailleuse grand style",
+   "description": "Un guerrier doit se sentir fort, oui ? Quoi de mieux pour se sentir très fort que d'avoir une allure incroyable ? Wikelo va donner à ton arme l'air d'une autre arme. Apporte-moi les objets de la liste et je te la donne. Au revoir.",
+   "titre_en": "Big Style LMG"
+  },
+  "0424e501-e57e-47cb-bada-79f849560b4e": {
+   "titre": "Un Scorpius modifié",
+   "description": "Wikelo ne sait pas ce que veut dire le nom, mais ce vaisseau est très rapide et très bon au combat. Avec quelques réglages, il peut faire mieux. Tu vois la liste de ce dont Wikelo a besoin : va le chercher et je le fabrique. Au revoir.",
+   "titre_en": "Build a Mod Scorpius"
+  },
+  "4df999a1-93ba-47a4-b498-cfaad7553da3": {
+   "titre": "Sur la base du fusil S71",
+   "description": "L'univers est dangereux dans l'espace humain. Bon d'avoir une bonne arme pour les mauvaises situations. Wikelo n'a pas beaucoup d'armes, mais sait rendre les utiles encore plus utiles. Si tu veux, apporte les choses et je le fais.",
+   "titre_en": "Built on S71 rifle"
+  },
+  "41231c57-f186-4c5e-ae51-524fc1e1d9a3": {
+   "titre": "Le Clipper passe au combat",
+   "description": "Le Clipper fait plein de choses bien, mais Wikelo s'est demandé : et s'il se battait davantage ? Il ferait toujours tout, mais une chose encore mieux. Bien, oui ? Je te donne le plan, tu fabriques mon nouveau métamatériau, tu me l'apportes et on échange.",
+   "titre_en": "Clipper Fight Now"
+  },
+  "9c4459ac-2527-4024-b8f1-a08081df252a": {
+   "titre": "Arme curieuse",
+   "description": "En se promenant dans vos systèmes, Wikelo a trouvé une arme très étrange mais qui marche. Très simple, mais très efficace. Si tu m'apportes les choses, je te montre ce que j'en ai fait.\n\nTrès amusant.",
+   "titre_en": "Curious Weapon"
+  },
+  "9d32ff6d-6b62-43d4-8b71-85d50e4154f5": {
+   "titre": "Une armure de lave",
+   "description": "Si tu as une armure, Wikelo peut lui donner un air brûlant. Joli style pour une armure utile. Apporte-moi les choses et je le fais.",
+   "titre_en": "Do Lava Suit"
+  },
+  "d4d26850-d4f4-4549-a0af-a478ee0be480": {
+   "titre": "Wolf extra spécial",
+   "description": "Wikelo très excité. Une idée de nouveau matériau. Mais le fabriquer est très délicat. Très compliqué. Besoin d'aide pour fabriquer un échantillon d'essai. Je te donne le plan, tu le fabriques, tu me l'apportes et on échange. Tu auras un L-22 Wolf extra spécial. Très puissant, très loup.",
+   "titre_en": "Extra Special Wolf"
+  },
+  "314c16b2-fffd-445d-9bfd-fde1414286cd": {
+   "titre": "Une F55 plus belle",
+   "description": "Parfois tu tires sur des gens, mais si tu es la dernière chose qu'ils voient avant de mourir, l'arme doit être superbe, non ? Wikelo va rendre ton arme bien plus belle. Apporte-moi les objets nécessaires et je te donne l'arme. Au revoir.",
+   "titre_en": "F55 Look Better"
+  },
+  "e186dc92-bac2-4298-b011-a68b4d058dc5": {
+   "titre": "Retoucher le pistolet Coda",
+   "description": "Wikelo a trouvé une caisse de pistolets Coda. Raison très étrange, je te la raconterai si tu veux. Après étude, Wikelo a trouvé une jolie façon d'embellir l'arme. Regarde, vois si ça t'intéresse. Au revoir.",
+   "titre_en": "Fix up Coda gun"
+  },
+  "7c5bdaa6-ad6a-44b3-a374-796b13ddd5e4": {
+   "titre": "Un Fortune pour toi",
+   "description": "Bonjour. Wikelo s'entraîne à faire mieux voler les vaisseaux. Les Xi'an aident les humains à construire ce vaisseau. Il vole bien. Il récupère bien. Mais Wikelo peut faire mieux si tu veux. Apporte les choses et je le fais. Au revoir.",
+   "titre_en": "Fortune ship for you"
+  },
+  "ba114637-1d33-46e5-b9ba-3834566add0f": {
+   "titre": "Arme militaire à dent, pour rire",
+   "description": "Wikelo revient avec une autre façon de jouer avec ce type d'arme. Elle ressemble davantage à l'arme de vos soldats, avec une dent de kopion qui pend. Vraiment méchante.\n\nSi tu veux, apporte les pièces à l'Emporium de Wikelo et je la fabrique.\n\nAu revoir.",
+   "titre_en": "Fun Military Tooth Gun"
+  },
+  "5712cdfc-84da-456f-97ed-697c9d04c026": {
+   "titre": "Golem pour les roches",
+   "description": "L'univers a besoin de ressources, alors Wikelo respecte toujours ceux qui creusent. Bon métier. Si tu débutes et veux un coup de pouce pour ton Golem, je peux.\n\nApporte.\n\nJe fabrique.",
+   "titre_en": "Golem Rocks"
+  },
+  "684c9209-3dec-4519-a86c-7f49df47d14c": {
+   "titre": "Guardian modifié pour le combat",
+   "description": "Ce vaisseau ressemble à un insecte du Protectorat. Drôle d'allure. Piqûre douloureuse. Wikelo peut en faire une version spéciale pour toi si tu veux. Fais piquer tes ennemis. Au revoir.",
+   "titre_en": "Guardian Fight Mod"
+  },
+  "1af113f6-5650-4da9-abf3-9676dcaf8a91": {
+   "titre": "Guardian pour abattre les vaisseaux",
+   "description": "Encore le vaisseau insecte. Celui-ci aide à abattre d'autres vaisseaux, mais si tu veux qu'il le fasse mieux, Wikelo peut. Regarde la liste et dis-le à Wikelo. Au revoir.",
+   "titre_en": "Guardian take down ship"
+  },
+  "88bb3702-e20a-42e3-8ba3-328f2333e30c": {
+   "titre": "Lourde et éclatante",
+   "description": "Cette armure est grosse, oui ! Elle te protège vraiment bien. Wikelo la rend extra brillante pour que tout le monde voie à quel point ton armure est bonne. Si tu apportes ce dont j'ai besoin, je te l'échange.",
+   "titre_en": "Heavy and Bright"
+  },
+  "ab52c274-a29e-4730-a311-917a27191416": {
+   "titre": "Gros électriseur VOLT",
+   "description": "Tu as besoin d'une arme utile. Oui, oui, Wikelo comprend. Wikelo rend aussi les armes utiles plus belles. Tu vois ce dont j'ai besoin. Tu apportes ? Je le fais.\n\nAu revoir.",
+   "titre_en": "Heavy VOLT Zapper"
+  },
+  "9d32ff6d-6b62-43d4-8b71-85d50e413743": {
+   "titre": "Combinaison de camouflage neige",
+   "description": "Tu veux rester caché. Wikelo comprend. Ne pose pas de questions. Mais que faire quand tu es dans la neige ? Wikelo a une combinaison pour ça.\n\nBienvenue.",
+   "titre_en": "Hide Snow Suit"
+  },
+  "ba4e3db4-0f7d-4692-8b9d-8efe3085e84d": {
+   "titre": "Tir brûlant",
+   "description": "Il te faut une bonne arme, oui ? J'en ai une pour toi. Petite mais puissante. Comme un piment balalu extra fort. Wikelo donne aussi à ce pistolet un air extra épicé. Tu apportes ce dont j'ai besoin et on échange.\n\nAu revoir.",
+   "titre_en": "Hot Shot"
+  },
+  "dbe950bb-885f-4c12-ad7d-878723bb251c": {
+   "titre": "Regarder le désert sans être vu",
+   "description": "Tu fais des choses dans le désert brûlant. Il faut être discret. Pas envie d'être vu. Wikelo comprend. Wikelo te donne une armure qui te rend discret dans le sable.\n\nApporte les choses à l'Emporium de Wikelo et je fabrique. Facile.\n\nAu revoir.",
+   "titre_en": "Look at desert but don't see you"
+  },
+  "5dec704a-de79-4311-88d1-53f9d05db952": {
+   "titre": "Un Ursa modifié",
+   "description": "Wikelo se lance aussi dans les vaisseaux. A regardé l'Ursa et l'a amélioré. Apporte-moi les pièces et je le fabrique pour toi. Mieux explorer les planètes. Vas-y.",
+   "titre_en": "Make a Ursa Mod"
+  },
+  "b4a0ba2d-a5f6-496b-bc04-5f0bce49067a": {
+   "titre": "Une armure lumineuse",
+   "description": "Wikelo a eu une idée excitante pendant une courte pause. Pensait aux petits vers luisants de Pyro et a imaginé une armure qui leur ressemble.\n\nSi tu trouves les pièces, apporte-les à l'Emporium de Wikelo et je la fabrique : toi aussi, tu brilleras.\n\nAu revoir.",
+   "titre_en": "Make glowy armor"
+  },
+  "6472920a-5588-4378-89a1-b2c5bcbfc75c": {
+   "titre": "Une arme couleur sable",
+   "description": "Wikelo peut donner à la nouvelle arme VOLT l'air d'une dune. Très discrète dans le désert.\n\nApporte les choses à l'Emporium de Wikelo et Wikelo le fait.\n\nAu revoir.",
+   "titre_en": "Make gun sandy"
+  },
+  "7b7cd8d9-d3e4-4f48-b995-487933fd332e": {
+   "titre": "L'ATLS sauteur qui tire",
+   "description": "Wikelo a trouvé une pièce très amusante pour la grande combinaison humaine qui saute très haut. Maintenant tu tires et tu sautes. Excitant.\n\nSi tu veux, apporte-moi ceci à l'Emporium de Wikelo. Je fabrique.\n\nWikelo",
+   "titre_en": "Make jumpy ATLS shoot"
+  },
+  "82d178e8-e7c1-4436-981c-c51dbaa87f3b": {
+   "titre": "Une armure de la marine spatiale",
+   "description": "Wikelo sait que vous, les humains, aimez votre marine. Wikelo comprend. Très gros vaisseaux. Puissants aussi. Wikelo peut te donner un ensemble d'armure aux couleurs de la marine. Très facile à faire.\n\nVois ce dont Wikelo a besoin, va le chercher, apporte-le à l'Emporium de Wikelo et elle est à toi.\n\nWikelo",
+   "titre_en": "Make space navy armor"
+  },
+  "c99e22e9-643c-4822-9f06-8c119722caee": {
+   "titre": "Armure Monolith très lisse",
+   "description": "Au combat, tu veux une armure solide. Elle protège les organes utiles pour vivre, oui, mais elle doit aussi impressionner. Wikelo fait une version de l'armure Monolith qui fait les deux.\n\nTu veux ? Apporte-moi ce dont j'ai besoin pour mon nouveau projet et je te la donne. Je te montre aussi comment la faire. Encore plus heureux.",
+   "titre_en": "Monolith Armor Very Smooth"
+  },
+  "99b90562-4e98-46d2-aa7e-0926bed3bdf8": {
+   "titre": "Plus qu'un Max",
+   "description": "Si tu veux transporter beaucoup de choses, le Hercules est très bon pour ça. Wikelo connaît même un souli du Protectorat qui a commencé à l'utiliser. Très gros. Wikelo peut te donner une version semblable si tu trouves ce dont Wikelo a besoin. Regarde la liste et dis-moi.",
+   "titre_en": "More than a Max"
+  },
+  "3c839c32-d313-4c13-ade0-eb45b5bdea4b": {
+   "titre": "Le Wolf le plus spécial",
+   "description": "Tu as été un bon partenaire d'échange pour Wikelo. Je t'offre ce Wolf modifié très spécial. L'échange est encore meilleur : apporte-moi ce que je veux et je te donne le Wolf spécial ET l'armure Antium ET une mitrailleuse VOLT. Très bonne affaire pour mon très bon client.",
+   "titre_en": "Most Special Wolf"
+  },
+  "5c494816-ebc0-46a6-a23c-d463d4b0330d": {
+   "titre": "Nouveau grand Starlancer de transport",
+   "description": "Si tu aimes avoir beaucoup de place pour transporter, Wikelo peut faire des choses utiles et merveilleuses au vaisseau MISC pour toi. Apporte-moi les pièces et je te donne une version encore meilleure que ce que les Xi'an savent faire.",
+   "titre_en": "New Move Big Starlancer Ship"
+  },
+  "e05b8ffb-7455-4f24-bbcf-43e9dffc0cca": {
+   "titre": "Maintenant, le Polaris. Offre limitée.",
+   "description": "Wikelo a récemment obtenu beaucoup de plans en échange avec un humain pas très malin. Maintenant, Wikelo peut fabriquer un très gros vaisseau.\n\nPas bon marché, et il faut beaucoup de pièces, mais je le fabrique. Si tu veux, fais vite : ça coûte cher à Wikelo, je ne pourrai pas le faire longtemps. Mais j'aime le nouveau système humain et je veux vous remercier tous pour l'accueil.\n\nApporte à l'Emporium de Wikelo si tu veux.\n\nAu revoir.",
+   "titre_en": "Now make Polaris. Short Time Deal."
+  },
+  "a033aab9-262e-44da-9213-35e225fc828a": {
+   "titre": "Nox modifié",
+   "description": "Wikelo connaît beaucoup de Xi'an. Ils parlent lentement, mais sont très intéressants si tu as de la patience. Ceci est un petit engin très rapide pour traverser une planète. Wikelo l'a un peu réglé pour qu'il file encore plus. Si tu veux, Wikelo le fabrique pour toi. Au revoir.",
+   "titre_en": "Noxy Mod"
+  },
+  "ade95587-2c0d-433e-87c4-865e7dc80b0c": {
+   "titre": "Peregrine modifié par Wikelo",
+   "description": "Wikelo ne veut pas faire la course, mais sait rendre un vaisseau rapide encore plus rapide. Si tu veux, apporte-moi les choses, et va plus vite.",
+   "titre_en": "Peregrine Wikelo Mod"
+  },
+  "698c51c9-2a49-46c4-baf6-2d1abad7661e": {
+   "titre": "Embellir le fusil Karna",
+   "description": "Un ami de Wikelo a dû échanger un vaisseau trouvé contre des crédits. Wikelo surpris d'y trouver beaucoup de caisses de fusils Karna. L'ami n'en voulait pas, sans doute. Bref, Wikelo a trouvé comment les rendre plus jolis. Si tu veux, apporte les choses. Au revoir.",
+   "titre_en": "Prettify Karna Gun"
+  },
+  "200def0f-c70b-4f05-918f-b3efa7f8590f": {
+   "titre": "De belles perspectives",
+   "description": "Wikelo adore les roches. Veut t'aider à trouver de meilleures roches. A rendu ce Prospector encore meilleur pour ce dur travail. Échange les objets et il est à toi.",
+   "titre_en": "Prospects Look Good"
+  },
+  "fec1ba32-a1bb-4cfb-adc9-8a2f792544e6": {
+   "titre": "Prowler encore plus utile",
+   "description": "Wikelo travaille dur. Tu travailles dur. Le Prowler Utility travaille dur. Mais apporte-moi les bons objets, je le fais travailler encore plus dur, et toi tu travailles moins dur. Au revoir.",
+   "titre_en": "Prowler More Utility"
+  },
+  "7304cb29-5e2a-4d01-80bb-2795b6e789d4": {
+   "titre": "Pulse plus",
+   "description": "Wikelo aime vraiment ce petit vaisseau humain. Le Pulse est très rapide. On peut le configurer de plein de façons pour qu'il aille plus vite. Si tu veux, je te donne le Pulse configuré comme j'aime. J'ai la liste de ce qu'il me faut pour ce travail. Au revoir.",
+   "titre_en": "Pulse Plus"
+  },
+  "fec4c8e6-df2f-4775-b8c3-c0e3fb7c35e7": {
+   "titre": "Prêt pour le RAFT ?",
+   "description": "Le RAFT est très utile. Wikelo le prend et le rend très, très utile. Il travaille et te rend heureux. Tu veux ? Apporte les objets à Wikelo pour l'échange.",
+   "titre_en": "Ready for RAFT?"
+  },
+  "af13a863-6d63-4935-bec6-d55d73e44f83": {
+   "titre": "Apollo rouge de combat",
+   "description": "L'Apollo est un très bon vaisseau. Il serait bien meilleur s'il était rouge. Wikelo rend tout possible. Tu échanges contre ce que je veux, et marché conclu.",
+   "titre_en": "Red Fight Apollo"
+  },
+  "05bb00fc-bb90-40a5-bcff-214ff876662b": {
+   "titre": "Armure rouge de combat",
+   "description": "Wikelo a entendu que pour les humains, le rouge est la couleur de la passion et de la colère. Cette armure convient aux deux. Donne-moi les objets de la liste et cette armure rouge est à toi.",
+   "titre_en": "Red Fight Armor"
+  },
+  "71b27232-bb75-417e-8009-a8b5d9787e5a": {
+   "titre": "Meteor de RSI modifié",
+   "description": "Le Meteor est gros. Il est lourd. Il a beaucoup d'armes. Mais Wikelo a trouvé comment le rendre encore meilleur. Tu as les choses que je prendrai pour le faire.\n\nC'est tout.",
+   "titre_en": "RSI Meteor Mod"
+  },
+  "9d32ff6d-6b62-43d4-8b71-85d50e413745": {
+   "titre": "Combinaison de bâtisseur brillante",
+   "description": "Il te faut une combinaison de travail. Bonne pour bosser. Si tu veux, Wikelo peut la rendre plus brillante. Vraiment belle. Vois ce dont Wikelo a besoin et apporte-le.",
+   "titre_en": "Shiny Builder Suit"
+  },
+  "6357945d-2e51-426f-b183-9c6f84c6a88b": {
+   "titre": "Le poignardeur sournois",
+   "description": "Wikelo a les pièces pour construire un vaisseau utile à ceux qui aiment se faufiler puis frapper. Il prend le F8C et le rend encore meilleur. J'ai noté ce dont Wikelo a besoin pour te le construire. À toi de décider. Au revoir.",
+   "titre_en": "Sneaky Stabber"
+  },
+  "ab52c274-a29e-4730-a311-917a271917a8": {
+   "titre": "Tireur des neiges",
+   "description": "Tu veux tirer de loin et rester caché. Mais il neige ? Wikelo a une arme pour toi.\n\nApporte les choses. Je donne.\n\nAu revoir.",
+   "titre_en": "Snow Snipe"
+  },
+  "77fa8882-e82f-4c97-9cab-a7151758cb99": {
+   "titre": "Idris spécial pour le combat",
+   "description": "Comme Wikelo a fait de bonnes affaires avec toi, voici un échange très spécial. L'Idris est un vaisseau puissant, parfait pour une personne grande et importante comme toi. Wikelo l'a même modifié pour le rendre plus dangereux ! Apporte-moi quelques objets et le vaisseau est à toi.",
+   "titre_en": "Special Idris For Killing"
+  },
+  "64f01a7a-62c6-42fa-8a62-6b537dfa3668": {
+   "titre": "Spirit cargo modifié",
+   "description": "Wikelo adore les vaisseaux de transport utiles. Le Spirit est très utile. Si tu en veux un, je peux le faire pour toi. Apporte-moi les choses et je le fais. Au revoir.",
+   "titre_en": "Spirit Cargo mod"
+  },
+  "f7e6a331-3f4c-4400-a4cf-dbd75bffa102": {
+   "titre": "Starfighter Inferno spécial",
+   "description": "Le Starfighter Inferno est un bon vaisseau, mais si tu veux qu'il se batte encore mieux ? Wikelo sait exactement quoi faire. Tu m'apportes les objets et je le fabrique pour toi. Au revoir.",
+   "titre_en": "Starfighter Inferno Special"
+  },
+  "3b698db0-7623-4210-9653-2025d491ab10": {
+   "titre": "Starlifter A2 modifié pour la guerre",
+   "description": "Apporte les choses à Wikelo et je te fais un Starlifter A2 qui se bat mieux. Il fait la guerre si bien que tu l'appelleras A1 ! Au revoir.",
+   "titre_en": "Starlifter A2 War Mod"
+  },
+  "eae3334f-310a-4213-88e5-b84d248cc083": {
+   "titre": "En combinaison, décollage",
+   "description": "Les vaisseaux ont de grandes vitres. Tout le monde te voit voler. Tu dois être le plus beau. Wikelo a une très bonne combinaison de vol pour toi. Échange : apporte-moi ce qu'il me faut et Wikelo te donne la combinaison. Le plan aussi, si tu ne l'as pas.",
+   "titre_en": "Suit Up Take Off"
+  },
+  "a026b45d-6726-4a86-898c-e0207f2880c4": {
+   "titre": "Trop d'arme",
+   "description": "Cette arme est très grosse et très bruyante. Wikelo l'adore. L'a rendue extra brillante pour que tout le monde voie à quel point elle est spéciale. Je pense qu'elle te plaira, alors apporte-moi l'échange.",
+   "titre_en": "Too Much Gun"
+  },
+  "7dfd619c-9977-4788-80bb-5671d221c342": {
+   "titre": "Échanger les jetons du Conseil contre des faveurs ?",
+   "description": "Si tu veux une autre façon d'obtenir des faveurs de Wikelo, j'ai quelque chose pour toi. Wikelo a besoin des jetons distribués par le groupe du Conseil. Wikelo ne fait pas partie de ces souli voleurs, mais fait affaire avec eux de temps en temps.\n\nSi tu apportes des jetons à l'Emporium de Wikelo, je les échange contre des faveurs.\n\nAu revoir.",
+   "titre_en": "Trade Council Scrip for Favors?"
+  },
+  "f6717a7c-115e-4e27-8efe-ec8e01b56487": {
+   "titre": "Échanger les jetons de mercenaire contre des faveurs ?",
+   "description": "Wikelo a une autre façon d'obtenir des faveurs, si ça t'intéresse.\n\nTon souli de mercenaires a des jetons en métal, utilisés comme des faveurs, mais faits d'un métal très intéressant dont Wikelo a besoin pour un nouveau projet.\n\nSi tu apportes des jetons à l'Emporium de Wikelo, je les échange contre des faveurs.\n\nAu revoir.",
+   "titre_en": "Trade Merc Scrip for Favors?"
+  },
+  "8743632c-fac2-4b7c-ae11-a48e683f11fa": {
+   "titre": "Échanger des morceaux de ver contre des faveurs ?",
+   "description": "Nouvelle façon d'obtenir des faveurs de Wikelo. On parle beaucoup des vers dans les tempêtes de radiations. Ils sont faits de plein de morceaux intéressants dont Wikelo trouve l'usage.\n\nSi tu apportes des morceaux à l'Emporium de Wikelo, je les échange contre des faveurs.\n\nAu revoir.",
+   "titre_en": "Trade Worm Parts for Favors?"
+  },
+  "1141c381-b38d-47af-b8eb-9b8a35985a8e": {
+   "titre": "Changer des choses en faveurs",
+   "description": "Peut-être que Wikelo n'a pas ce que tu veux faire fabriquer (étrange, mais d'accord). L'ancien souli donnait des faveurs, très bonne façon de prouver que tu travailles pour moi. Rassemble-en assez et échange-les quand j'ai quelque chose que tu veux.\n\nApporte les choses à l'Emporium de Wikelo et je les échange contre des faveurs.\n\nAu revoir.",
+   "titre_en": "Turn Things to Favor"
+  },
+  "c55c9f61-84d9-4180-8715-eab2fe524deb": {
+   "titre": "Améliorer l'Intrepid",
+   "description": "Si tu cherches un Intrepid encore plus intrépide, Wikelo peut aider. Apporte les choses et tu auras des touches spéciales de Wikelo et une jolie nouvelle peinture. Au revoir.",
+   "titre_en": "Upgrade Intrepid"
+  },
+  "2597ef18-f1d5-4d97-bba4-8b6f900ded50": {
+   "titre": "Très faim",
+   "description": "Vous, les humains, occupez beaucoup Wikelo. Plus de travail que chez l'ancien souli. Mais Wikelo a très faim maintenant et ne trouve pas à manger.\n\nAide, s'il te plaît. Apporte à manger et à boire à l'Emporium de Wikelo.\n\nWikelo apprécie beaucoup ton aide. Je te donnerai quelque chose en retour.\n\nAu revoir.",
+   "titre_en": "Very Hungry"
+  },
+  "e44de29c-a2c3-49ef-864b-03eb7ae466db": {
+   "titre": "Arme VOLT façon marine",
+   "description": "Wikelo entend parler d'une nouvelle arme à énergie du souli VOLT. Si tu veux, Wikelo peut la rendre plus belle. Trouvée dans la tempête, elle tire la tempête, mais Wikelo l'améliore pour ceux qui aiment la marine humaine.\n\nApporte les choses à l'Emporium de Wikelo et Wikelo le fait.\n\nAu revoir.",
+   "titre_en": "Volt gun more Navy-like"
+  },
+  "3d432269-ee32-4127-abda-60b30a5c3660": {
+   "titre": "Marcher dans le danger. Avoir du style.",
+   "description": "Peut-être que tu aimes marcher sur des planètes très chaudes. Ou très froides. Ou pleines de roches. Wikelo peut faire mieux marcher pour toi la combinaison Novikov du souli humain Caldera. Apporte les choses si tu veux, et je la fabrique. Au revoir.",
+   "titre_en": "Walk in danger. Look good."
+  },
+  "c4c7fa2d-91f5-4171-988b-9003841f4fcd": {
+   "titre": "Une armure qui ressemble à un arbre ?",
+   "description": "Bonjour. Tu marches dans les bois mais ne veux pas qu'on le sache ? Wikelo a une armure pour toi.\n\nSi tu apportes les choses à l'Emporium de Wikelo, tu peux l'avoir.\n\nÇa t'intéresse ?",
+   "titre_en": "Want armor look like tree?"
+  },
+  "e7352f49-da6c-45c3-a7f7-6e897d788913": {
+   "titre": "De meilleurs yeux ?",
+   "description": "Wikelo a les meilleurs yeux pour voir très loin. Je te les donne si tu me donnes ce que je demande.",
+   "titre_en": "Want Better Eyes?"
+  },
+  "82a0d506-def3-4ab5-b0e0-8833c7102f34": {
+   "titre": "Envie d'un Polaris ? Il faut quelque chose de spécial.",
+   "description": "Wikelo a besoin de grandes quantités de quantainium et veut bien te donner un beau Polaris en échange. Mais beaucoup d'humains n'ont pas beaucoup de place, alors tu échanges au fur et à mesure. Wikelo te donne des morceaux de Polaris si tu échanges du quantainium. Comme des faveurs. Ça aide Wikelo à se souvenir de combien tu as donné.\n\nApporte du quantainium à l'Emporium de Wikelo et je l'échange contre des morceaux.\n\nAu revoir.",
+   "titre_en": "Want Polaris? Need something special."
+  },
+  "8d7849fe-85c5-4c63-9754-a71bae57792f": {
+   "titre": "Envie d'un Taurus",
+   "description": "Wikelo est tombé sur les plans du Constellation Taurus. Beau vaisseau, mais Wikelo le rend un peu meilleur. Plus joli aussi. Si tu veux, apporte les choses.",
+   "titre_en": "Want Taurus ship"
+  },
+  "94bdfda2-a4d9-4d1a-877b-68518eedf320": {
+   "titre": "C'est quoi, un Terrapin ?",
+   "description": "Wikelo ne connaît pas ce mot humain, mais le vaisseau est très utile quand ça devient dangereux. Si tu veux, je peux t'en donner une nouvelle version. Peut-être plus utile ?\n\nTu le pilotes et tu me dis. Au revoir.",
+   "titre_en": "What is Terrapin?"
+  },
+  "758e6b6a-f89e-4721-ae9e-1ec27d7b2f97": {
+   "titre": "Où est le Wolf ? Ici, le Wolf",
+   "description": "Si tu veux rester discret et surprendre les gens, c'est le Wolf qu'il te faut. Wikelo l'a modifié pour qu'il soit extra furtif. Je te l'échange quand tu m'apportes les objets que je veux.",
+   "titre_en": "Where Wolf? Here Wolf"
+  },
+  "028d7a46-bd97-4e32-a5bf-0b1775f05e1c": {
+   "titre": "Wikelo arrive dans le système",
+   "description": "Bonjour, je suis Wikelo. Arrivé récemment dans votre système et très content d'être ici. J'ai passé beaucoup de temps dans l'UEE et heureux d'y en passer encore.\n\nJ'ai un endroit où je fabrique des choses à partir d'autres choses.\n\nBesoin de quelqu'un pour m'apporter des choses utiles et finir le projet sur lequel je travaille. Tu as la liste. Va chercher, s'il te plaît. Je suis à l'Emporium de Wikelo.\n\nJe te donnerai un objet pour ton aide.\n\nEt quand c'est fini, si tu veux faire plus, j'ai beaucoup de choses à fabriquer dans ma modeste boutique. Viens, regarde la jolie affiche, puis décide ce que tu veux que je fabrique.\n\nAu revoir.",
+   "titre_en": "Wikelo Arrive to System"
+  },
+  "c63d9c5a-5e25-49da-8254-b78706abea86": {
+   "titre": "F7 de la marine façon Wikelo",
+   "description": "Wikelo sait combien vous, les humains, aimez la marine, alors Wikelo en a un maintenant. Si tu veux la version Wikelo du F7 Mk II, apporte-moi les choses et c'est parti. Très amusant. Au revoir.",
+   "titre_en": "Wikelo Navy F7"
+  },
+  "2453dcac-761d-4f95-8783-d31106fcfe1e": {
+   "titre": "Combinaison xi'an Xanthule améliorée",
+   "description": "Wikelo aime beaucoup le souli Syang. Ils font des combinaisons de vol pleines de lignes, très utiles. Wikelo peut même les rendre un peu plus jolies si tu veux. Apporte les choses, je le fais.",
+   "titre_en": "Xi'an Xanthule Suit made better"
+  },
+  "dcc744eb-e9c5-4364-a1d2-9b39864baecf": {
+   "titre": "Ton meilleur tir",
+   "description": "Ce fusil tire très bien, mais son design pourrait être plus beau. Wikelo arrange. Très beau maintenant. Je te le donne contre un échange. Apporte-moi les choses, je te donne le fusil. Et le plan aussi, si tu en as besoin.",
+   "titre_en": "Your Best Shot"
+  },
+  "f986a67a-76bb-4f19-9c84-d2d6db0bd755": {
+   "titre": "Arme électrique façon forêt",
+   "description": "Wikelo entend parler d'un nouveau type d'arme à énergie du souli VOLT. Elle frappe très fort. Si tu veux, Wikelo peut la rendre encore plus belle. Trouvée dans la tempête, elle tire la tempête, mais Wikelo lui donne un air plus boisé. Tu la poses en forêt ? Disparue.\n\nApporte les choses à l'Emporium de Wikelo et Wikelo le fait.\n\nAu revoir.",
+   "titre_en": "Zappy gun more woodlike"
+  },
+  "c3722ee0-4f40-4232-acab-6f254a1d0e25": {
+   "titre": "Zeus cargo spécial",
+   "description": "Wikelo peut faire une nouvelle version du Zeus de transport. Si tu veux, apporte ce qu'il faut, et le vaisseau est à toi. Équitable. Au revoir.",
+   "titre_en": "Zeus Cargo Special"
+  },
+  "69db67eb-05b6-49cd-bf41-83831f993142": {
+   "titre": "Zeus spécial",
+   "description": "Wikelo peut faire une nouvelle version du Zeus. Je sais que c'est un vaisseau important pour les humains. Pas sûr de savoir pourquoi, mais oui, très utile. Bref, je peux l'améliorer et le rendre un peu plus joli. Ce qu'il me faut est sur la liste. Si tu veux, apporte. Au revoir.",
+   "titre_en": "Zeus Special"
+  }
+ }
+}
