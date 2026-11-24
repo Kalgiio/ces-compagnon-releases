@@ -16,6 +16,8 @@
   <a href="https://status.ces-sc.fr"><img src="https://img.shields.io/badge/statut-status.ces--sc.fr-22c55e?style=for-the-badge" alt="Statut des services"></a>
 </p>
 
+> Présentation complète, avec un aperçu des fenêtres : **[app.ces-sc.fr/compagnon/telecharger](https://app.ces-sc.fr/compagnon/telecharger)**
+>
 > **Réservée aux membres du CES et aux invités autorisés.** La connexion se fait avec ton compte du portail
 > [app.ces-sc.fr](https://app.ces-sc.fr) : sans compte, l'application ne fait rien.
 
