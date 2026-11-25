@@ -97,11 +97,13 @@ pub fn personnages_portail(portail: tauri::State<'_, Portail>) -> Result<Value, 
 pub fn personnage_choisir_photo(app: tauri::AppHandle) -> Option<String> {
     use tauri_plugin_dialog::DialogExt;
     let f = app.dialog().file().set_title("Photo du visage du personnage").add_filter("Images", &["jpg", "jpeg", "png", "webp"]).blocking_pick_file()?;
-    f.into_path().ok().map(|p| p.display().to_string())
+    f.into_path().ok().map(crate::choix::memoriser) // jeton opaque, jamais le chemin
 }
 
-pub(crate) fn partie_photo(chemin: &str) -> Result<reqwest::blocking::multipart::Part, String> {
-    let p = Path::new(chemin);
+/// `jeton` = jeton remis par une boîte de dialogue (`choix.rs`), jamais un chemin venu de l'interface.
+pub(crate) fn partie_photo(jeton: &str) -> Result<reqwest::blocking::multipart::Part, String> {
+    let chemin = crate::choix::chemin(jeton)?;
+    let p = chemin.as_path();
     let ext = p.extension().map(|e| e.to_string_lossy().to_lowercase()).unwrap_or_default();
     let mime = match ext.as_str() {
         "jpg" | "jpeg" => "image/jpeg",

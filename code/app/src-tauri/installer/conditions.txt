@@ -1,0 +1,54 @@
+CONDITIONS D'UTILISATION ET DONNÉES PERSONNELLES — CES COMPAGNON
+Version du 25 novembre 2026
+
+Merci de lire ce texte avant d'installer ou d'utiliser CES Compagnon. En cliquant sur « J'accepte », tu acceptes ces conditions.
+
+## 1. Qui édite l'application
+CES Compagnon est l'application Windows du Corps Expéditionnaire Spatial (C.E.S), organisation communautaire et bénévole de joueurs de Star Citizen, sans activité commerciale. Directeur de la publication : Kalgiio. Contact : le serveur Discord du CES (https://discord.gg/nrbYEtFJDX).
+Outil de fans non affilié à Cloud Imperium Games. Star Citizen® est une marque de Cloud Imperium Rights LLC.
+
+## 2. À quoi elle sert
+L'application relie ton PC au portail du CES (app.ces-sc.fr) : présence en jeu, carnet de voyage, notifications, SOS, radio, traduction, profils de touches, personnages et outils (commerce, minage, Wikelo). Elle est réservée aux membres du CES et aux invités autorisés : sans compte du portail, elle ne fait rien. Les conditions d'utilisation du portail (https://app.ces-sc.fr/cgu) s'appliquent aussi.
+
+## 3. Ton jeu
+L'application ne touche pas au jeu : aucune lecture de la mémoire du jeu, aucune injection, aucune interception réseau, aucune automatisation. Elle lit les fichiers que le jeu écrit (journal, réglages, touches) et n'écrit dans le dossier du jeu que sur ta demande (traduction, touches, personnages), avec une sauvegarde. Les raccourcis SOS sont de simples raccourcis Windows, désactivés par défaut. Tu restes seul responsable du respect des conditions de Cloud Imperium Games.
+
+## 4. Les données envoyées au portail du CES
+Comme toute application connectée à Internet, chaque échange avec le portail transmet automatiquement :
+- ton adresse IP ;
+- la date et l'heure de l'échange ;
+- la version de l'application et de Windows (« CES-Compagnon/x.y.z (Windows) »).
+Selon ce que tu utilises et ce que tu autorises (Réglages › Partage, type par type, modifiable à tout moment) :
+- ta présence (hors ligne, au menu, dans l'univers) et la version du jeu ;
+- tes événements de jeu : début et fin de session, lieux visités, missions terminées, sessions de minage ;
+- tes SOS (type, et le dernier lieu connu envoyé par l'application) ;
+- les personnages, photos, profils de touches et images Wikelo que tu choisis d'envoyer.
+Ne sont JAMAIS envoyés : le journal brut du jeu, des informations sur d'autres joueurs, tes fichiers personnels, tes mots de passe. Ton jeton de connexion est rangé dans le gestionnaire d'identification de Windows.
+
+## 5. Pourquoi (bases légales, RGPD)
+- Faire fonctionner le service que tu demandes (exécution des présentes conditions, art. 6.1.b du RGPD) : connexion, notifications, SOS, envois que tu déclenches.
+- Sécurité et prévention des abus (intérêt légitime, art. 6.1.f) : journaux techniques avec l'adresse IP, la date et l'heure.
+- Partage facultatif de ta présence et de tes événements de jeu (ton consentement, art. 6.1.a) : tu peux le retirer à tout moment dans Réglages › Partage, sans conséquence sur le reste de l'application.
+- Obligations légales de conservation des données de connexion, le cas échéant.
+
+## 6. Combien de temps
+- Journaux techniques (adresse IP, date et heure, version) : 12 mois au plus, durée recommandée par la CNIL pour la journalisation et prévue par la loi pour les données de connexion.
+- Présence en jeu : quelques minutes en mémoire, jamais historisée.
+- Événements de jeu, personnages, profils de touches : tant que ton compte existe, ou jusqu'à ce que tu les effaces (Espace Compagnon ou Mes données).
+- Sauvegardes du portail : 14 jours (quotidiennes) et 12 mois (mensuelles).
+
+## 7. Qui y a accès
+L'administration du CES, dans la limite de ses besoins. Prestataires techniques : Hostinger (hébergement, Union européenne) et Cloudflare (protection et distribution, avec des transferts encadrés hors de l'Union européenne). Aucune donnée n'est vendue, louée ni utilisée pour de la publicité.
+L'application contacte aussi directement, depuis ton PC, des services tiers qui reçoivent ton adresse IP selon leurs propres règles : GitHub (mises à jour), Star Citizen Wiki (contrats de Wikelo), UEX (commerce et minage), le dépôt de la traduction communautaire, Discord (Rich Presence, uniquement si Discord est ouvert sur ton PC).
+
+## 8. Tes droits
+Tu peux demander l'accès à tes données, leur rectification, leur effacement, leur portabilité, la limitation du traitement ou t'y opposer, et retirer ton consentement. Contact : le serveur Discord du CES ; réponse sous un mois. Tu peux aussi effacer tes envois toi-même (Espace Compagnon › Données envoyées) et délier l'appareil (Profil › Sécurité). En cas de désaccord, tu peux saisir la CNIL (https://www.cnil.fr).
+
+## 9. Âge
+L'application s'adresse aux personnes de 15 ans et plus. En dessous, l'accord d'un titulaire de l'autorité parentale est nécessaire.
+
+## 10. Code et licence
+Le code de l'application est publié pour consultation sous licence PolyForm Strict 1.0.0 (https://github.com/Kalgiio/ces-compagnon-releases) : lecture et audit autorisés, modification, redistribution et réutilisation interdites sans accord écrit du CES.
+
+## 11. Responsabilité et évolution
+L'application est fournie gratuitement, « en l'état », sans garantie de disponibilité. Le CES ne peut être tenu responsable d'une perte de données de jeu : garde tes propres sauvegardes. Ces conditions peuvent évoluer : en cas de changement, l'application te les présentera de nouveau avant que tu continues. Droit applicable : droit français.

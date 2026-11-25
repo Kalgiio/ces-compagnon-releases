@@ -308,7 +308,7 @@ mod tests {
 pub fn wikelo_choisir_image(app: tauri::AppHandle) -> Option<String> {
     use tauri_plugin_dialog::DialogExt;
     let f = app.dialog().file().set_title("Image à proposer pour cet objet").add_filter("Images", &["jpg", "jpeg", "png", "webp"]).blocking_pick_file()?;
-    f.into_path().ok().map(|p| p.display().to_string())
+    f.into_path().ok().map(crate::choix::memoriser) // jeton opaque, jamais le chemin
 }
 
 /// Envoie la proposition au portail ; la modération du CES la valide avant qu'elle remplace l'image du wiki.

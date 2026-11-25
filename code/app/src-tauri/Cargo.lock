@@ -473,7 +473,7 @@ dependencies = [
 
 [[package]]
 name = "ces-compagnon"
-version = "1.0.0"
+version = "1.0.3"
 dependencies = [
  "base64 0.22.1",
  "discord-rich-presence",

@@ -116,6 +116,84 @@ pub fn analyser(xml: &str) -> Result<Profil, String> {
     Ok(p)
 }
 
+/// Profil RÉDUIT à ce qui a été modifié (demande du CES, 25/11 : « principe du moindre privilège ») : seulement les
+/// touches réassignées (`actionmap` › `action` › `rebind`), et pour chaque appareil utilisé son type et son numéro.
+/// Tout le reste du fichier du jeu est retiré : noms et identifiants matériels des appareils (`Product="… {GUID}"`),
+/// réglages fins des appareils (`deviceoptions`), courbes et options. C'est ce qui part au portail (partage) et dans
+/// un fichier exporté ; les sauvegardes locales gardent le fichier complet (restauration fidèle).
+pub fn minimal(xml: &str) -> Result<String, String> {
+    use quick_xml::escape::escape;
+    let mut r = Reader::from_str(xml);
+    r.config_mut().trim_text(true);
+    let mut entete = (String::from("1"), String::from("2"), String::from("2"));
+    let mut cartes: Vec<(String, Vec<(String, Vec<String>)>)> = Vec::new();
+    let mut appareils: Vec<(String, String)> = Vec::new();
+    let mut racine_vue = false;
+    let ok = |t: &str| !t.is_empty() && t.len() <= 120;
+    loop {
+        match r.read_event() {
+            Ok(Event::Start(e)) | Ok(Event::Empty(e)) => match e.name().as_ref() {
+                "ActionMaps" => racine_vue = true,
+                "ActionProfiles" => {
+                    let chiffre = |n: &str, d: &str| attribut(&e, n).filter(|v| v.len() <= 4 && v.chars().all(|c| c.is_ascii_digit())).unwrap_or_else(|| d.to_string());
+                    entete = (chiffre("version", "1"), chiffre("optionsVersion", "2"), chiffre("rebindVersion", "2"));
+                }
+                "actionmap" => {
+                    if let Some(n) = attribut(&e, "name").filter(|n| ok(n)) {
+                        cartes.push((n, Vec::new()));
+                    }
+                }
+                "action" => {
+                    if let (Some(n), Some(c)) = (attribut(&e, "name").filter(|n| ok(n)), cartes.last_mut()) {
+                        c.1.push((n, Vec::new()));
+                    }
+                }
+                "rebind" => {
+                    let Some(entree) = attribut(&e, "input").map(|i| i.trim().to_string()).filter(|i| i.len() <= 80) else { continue };
+                    let mut balise = format!(r#"<rebind input="{}""#, escape(entree.as_str()));
+                    for cle in ["activationMode", "multiTap"] {
+                        if let Some(v) = attribut(&e, cle).filter(|v| ok(v)) {
+                            balise.push_str(&format!(r#" {cle}="{}""#, escape(v.as_str())));
+                        }
+                    }
+                    balise.push_str("/>");
+                    if let Some(a) = cartes.last_mut().and_then(|c| c.1.last_mut()) {
+                        a.1.push(balise);
+                    }
+                    // appareil utilisé : « kb1 », « js2 », « gp1 », « mo1 »
+                    let prefixe = entree.split('_').next().unwrap_or("");
+                    let (t, n) = prefixe.split_at(prefixe.find(|c: char| c.is_ascii_digit()).unwrap_or(prefixe.len()));
+                    let type_ = match t { "kb" => "keyboard", "js" => "joystick", "gp" => "gamepad", "mo" => "mouse", _ => "" };
+                    if !type_.is_empty() && !n.is_empty() && n.chars().all(|c| c.is_ascii_digit()) && !appareils.iter().any(|(a, b)| a == type_ && b == n) {
+                        appareils.push((type_.to_string(), n.to_string()));
+                    }
+                }
+                _ => {}
+            },
+            Ok(Event::Eof) => break,
+            Err(e) => return Err(format!("Fichier de touches illisible : {e}")),
+            _ => {}
+        }
+    }
+    if !racine_vue {
+        return Err("Ce fichier n'est pas un profil de touches de Star Citizen (balise ActionMaps absente).".into());
+    }
+    let mut x = format!("<ActionMaps>\n <ActionProfiles version=\"{}\" optionsVersion=\"{}\" rebindVersion=\"{}\" profileName=\"default\">\n", entete.0, entete.1, entete.2);
+    for (t, n) in &appareils {
+        x.push_str(&format!("  <options type=\"{t}\" instance=\"{n}\"/>\n"));
+    }
+    x.push_str("  <modifiers />\n");
+    for (carte, actions) in cartes.iter().filter(|c| c.1.iter().any(|a| !a.1.is_empty())) {
+        x.push_str(&format!("  <actionmap name=\"{}\">\n", escape(carte.as_str())));
+        for (action, rebinds) in actions.iter().filter(|a| !a.1.is_empty()) {
+            x.push_str(&format!("   <action name=\"{}\">{}</action>\n", escape(action.as_str()), rebinds.join("")));
+        }
+        x.push_str("  </actionmap>\n");
+    }
+    x.push_str(" </ActionProfiles>\n</ActionMaps>\n");
+    Ok(x)
+}
+
 pub fn lire(dossier_jeu: &Path) -> Profil {
     let chemin = chemin_profil(dossier_jeu);
     let mut p = match std::fs::read_to_string(&chemin) {
@@ -235,7 +313,8 @@ pub fn touches_exporter(
         Some(n) => fichier_sauvegarde(&dossiers, &n)?,
         None => chemin_profil(&dossier_jeu(&surveillance)?),
     };
-    let contenu = std::fs::read(&source).map_err(|_| "Rien à exporter.".to_string())?;
+    let complet = std::fs::read_to_string(&source).map_err(|_| "Rien à exporter.".to_string())?;
+    let contenu = minimal(&complet)?; // seulement les touches modifiées, sans identifiant matériel
     let Some(cible) = app
         .dialog()
         .file()
@@ -296,6 +375,16 @@ mod tests {
   </actionmap>
  </ActionProfiles>
 </ActionMaps>"#;
+
+    #[test]
+    fn profil_reduit_sans_materiel() {
+        let m = minimal(XML).unwrap();
+        assert!(!m.contains("Product") && !m.contains("6F1D2B61"), "aucun identifiant matériel");
+        assert!(m.contains(r#"<rebind input="kb1_mouse5"/>"#) && m.contains(r#"<rebind input="js2_button3"/>"#));
+        assert!(m.contains(r#"<options type="joystick" instance="2"/>"#) && m.contains(r#"<options type="keyboard" instance="1"/>"#));
+        let p = analyser(&m).unwrap();
+        assert_eq!(p.touches.len(), analyser(XML).unwrap().touches.len(), "même nombre de touches");
+    }
 
     #[test]
     fn lit_le_profil_reel() {

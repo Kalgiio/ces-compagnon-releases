@@ -33,6 +33,7 @@ function LogoCompagnon({ className }) {
     </span>
   );
 }
+import { EcranConditions, TexteConditions } from './Conditions.jsx';
 import iconeCanary from '../icons-src/ces-compagnon-canary.svg';
 import iconeStable from '../icons-src/ces-compagnon-stable.svg';
 
@@ -1004,6 +1005,10 @@ function APropos({ canal }) {
         </dl>
       </Panel>
 
+      <Panel header="Conditions d’utilisation et données personnelles">
+        <details><summary className="cmp-small">Lire les conditions acceptées</summary><TexteConditions /></details>
+      </Panel>
+
       <Panel header="Star Citizen">
         <p className="cmp-muted cmp-small">
           Outil de fans <strong>non affilié à Cloud Imperium Games</strong>. Star Citizen®, Squadron 42®, Roberts Space Industries® et
@@ -1127,13 +1132,58 @@ function CanalTesteur({ canal, onChange }) {
 
 const NOTIFS = [
   { cle: 'lancements', titre: 'Lancements de Star Citizen', desc: '« X a lancé Star Citizen », pour les membres qui ont choisi de l’annoncer sur le portail.' },
-  { cle: 'raccourcisSos', titre: 'SOS au clavier (même en jeu)', desc: 'Ctrl + Maj + 1 combat · 2 panne · 3 carburant · 4 médical · 5 transport · 6 autre. Appuie DEUX fois sur la même combinaison en moins de 3 s : le premier appui affiche une carte, le second envoie le SOS.' },
+  { cle: 'raccourcisSos', titre: 'SOS au clavier (même en jeu)', desc: 'Une combinaison par type de SOS (par défaut Ctrl + Maj + 1 à 6, réglables ci-dessous). Appuie DEUX fois sur la même combinaison en moins de 3 s : le premier appui affiche une carte, le second envoie le SOS.' },
   { cle: 'carte', titre: 'Carte CES sur le bureau', desc: 'Lancements et SOS : une carte aux couleurs du CES en bas à droite de l’écran, par-dessus les autres fenêtres, au lieu de la notification Windows.' },
   { cle: 'defcon', titre: 'Alertes DEFCON', desc: 'Une notification à chaque changement de niveau.' },
   { cle: 'discord', titre: 'Discord Rich Presence', desc: 'Affiche « Dans le Verse » sur ton profil Discord pendant que tu joues (Discord doit être ouvert sur ce PC).' },
   { cle: 'portail', titre: 'Notifications du portail', desc: 'Inscriptions, mentions, invitations, résultats d’examen… comme dans la cloche. Désactive pour les mettre en sourdine.' },
   { cle: 'bandeau', titre: 'Alerte dans la fenêtre', desc: 'De DEFCON 3 à 1 : bandeau sous la barre de titre et liseré animé autour de la fenêtre de l’application.' },
 ];
+
+const TYPES_SOS_TOUCHES = [['combat', 'Combat', 'Ctrl+Shift+1'], ['panne', 'Panne', 'Ctrl+Shift+2'], ['carburant', 'Carburant', 'Ctrl+Shift+3'],
+  ['medical', 'Médical', 'Ctrl+Shift+4'], ['transport', 'Transport', 'Ctrl+Shift+5'], ['autre', 'Autre', 'Ctrl+Shift+6']];
+const joliTouche = (t) => String(t || '').replace('Shift', 'Maj').replace('Super', 'Windows').split('+').join(' + ');
+
+/** Combinaisons du SOS au clavier, réglables par type : F1 à F24, ou toute combinaison avec Ctrl, Alt ou Windows. */
+function ToucheSos({ r, enregistrer }) {
+  const [capture, setCapture] = useState(null); // type en cours de saisie
+  const [msg, setMsg] = useState(null);
+  useEffect(() => {
+    if (!capture) return undefined;
+    invoke('raccourcis_suspendre', { suspendre: true }).catch(() => {});
+    const touche = (e) => {
+      e.preventDefault(); e.stopPropagation();
+      if (e.key === 'Escape' && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) { setCapture(null); return; }
+      if (['Control', 'Shift', 'Alt', 'Meta', 'OS'].includes(e.key)) return; // on attend la touche finale
+      const mods = [e.ctrlKey && 'Ctrl', e.altKey && 'Alt', e.shiftKey && 'Shift', e.metaKey && 'Super'].filter(Boolean);
+      const texteSaisi = [...mods, e.code].join('+');
+      const type = capture;
+      invoke('raccourci_verifier', { texteSaisi })
+        .then((canon) => enregistrer({ ...r.touchesSos, [type]: canon }).then(() => { setMsg(null); setCapture(null); }).catch((err) => setMsg(String(err))))
+        .catch((err) => setMsg(String(err)));
+    };
+    window.addEventListener('keydown', touche, true);
+    return () => { window.removeEventListener('keydown', touche, true); invoke('raccourcis_suspendre', { suspendre: false }).catch(() => {}); };
+  }, [capture]); // eslint-disable-line react-hooks/exhaustive-deps
+  const touches = r.touchesSos || {};
+  return (
+    <div className="cmp-sos-touches">
+      <p className="cmp-muted cmp-small">Clique sur une combinaison puis appuie sur les touches voulues : F1 à F24 (touches de macro, Stream Deck…) seules, ou une touche avec Ctrl, Alt ou Windows. Échap pour annuler.</p>
+      <ul className="cmp-sos-touches__liste">
+        {TYPES_SOS_TOUCHES.map(([k, l, def]) => (
+          <li key={k}>
+            <span>{l}</span>
+            <button type="button" className={capture === k ? 'cmp-kbd is-capture' : 'cmp-kbd'} onClick={() => { setMsg(null); setCapture(capture === k ? null : k); }}>
+              {capture === k ? 'Appuie sur la combinaison…' : joliTouche(touches[k] || def)}
+            </button>
+            {touches[k] && <button type="button" className="cmp-lien cmp-small" onClick={() => { const n = { ...touches }; delete n[k]; enregistrer(n).catch((err) => setMsg(String(err))); }}>Par défaut</button>}
+          </li>
+        ))}
+      </ul>
+      {msg && <Message severity="danger" onClose={() => setMsg(null)}>{msg}</Message>}
+    </div>
+  );
+}
 
 /** Notifications Windows (toasts natifs) et bandeau DEFCON : réglages locaux, désactivables. */
 function NotificationsWindows() {
@@ -1155,6 +1205,7 @@ function NotificationsWindows() {
           </SettingRow>
         ))}
       </div>
+      {r.raccourcisSos && <ToucheSos r={r} enregistrer={(touchesSos) => { const neuf = { ...r, touchesSos }; return invoke('notif_reglages_ecrire', { reglages: neuf }).then(() => setR(neuf)); }} />}
       <div className="cmp-actions">
         <Button size="sm" variant="outlined" label="Tester une notification" icon="bell" onClick={() => invoke('notif_tester').catch(() => {})} />
       </div>
@@ -2017,6 +2068,8 @@ export default function App() {
   const [tiroir, setTiroir] = useState(false);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [visite, setVisite] = useState(false);
+  const [conditions, setConditions] = useState(null);
+  useEffect(() => { invoke('conditions_etat').then(setConditions).catch(() => setConditions({ acceptee: false })); }, []);
   const [sosOuvert, setSosOuvert] = useState(false);
   const [radioOuverte, setRadioOuverte] = useState(false);
   const fermerRadio = useCallback(() => setRadioOuverte(false), []);
@@ -2105,7 +2158,7 @@ export default function App() {
         </>
       )}
 
-      {!compte?.relie ? <Connexion compte={compte} relire={relire} icone={canal?.build === 'stable' ? iconeStable : iconeCanary} /> : (
+      {conditions && !conditions.acceptee ? <EcranConditions onAccepte={setConditions} /> : !compte?.relie ? <Connexion compte={compte} relire={relire} icone={canal?.build === 'stable' ? iconeStable : iconeCanary} /> : (
       <div className={`hud-corps hud-corps--${navPos}`}>
         <nav className="hud-rail" aria-label="Navigation">
           <div className="hud-rail__defil">

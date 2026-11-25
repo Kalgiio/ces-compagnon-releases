@@ -4,6 +4,8 @@
 //! processus Windows et les fichiers que le jeu écrit ; jamais la mémoire du processus, jamais
 //! d'injection, de hook ni d'interception réseau.
 
+mod choix;
+mod conditions;
 mod canal;
 mod carnet;
 mod commerce;
@@ -17,7 +19,6 @@ mod portail;
 mod site;
 mod notif;
 mod rpc;
-mod chat;
 mod lanceur;
 mod sos;
 mod natif;
@@ -115,9 +116,13 @@ pub fn run() {
             minage::minage_exporter,
             wikelo::wikelo_liste,
             wikelo::wikelo_detail,
+            conditions::conditions_etat,
+            raccourcis::raccourci_verifier,
+            raccourcis::raccourcis_suspendre,
+            conditions::conditions_accepter,
+            conditions::conditions_ouvrir_lien,
             wikelo::wikelo_choisir_image,
             wikelo::wikelo_proposer,
-            chat::chat_action,
             sos::sos_action,
             natif::portail_api,
             personnages::personnages_locaux,
@@ -183,9 +188,11 @@ pub fn run() {
             app.manage(wikelo::SuiviWikelo(std::sync::Mutex::new(None)));
             app.manage(traduction::Dossiers { donnees: dossier.clone() });
             app.manage(raccourcis::Attente::default());
+            app.manage(raccourcis::Actifs::default());
             vignette::installer(app.handle());
-            if app.state::<notif::Notifications>().raccourcis_sos() {
-                if let Err(e) = raccourcis::appliquer(app.handle(), true) {
+            let (sos_actif, sos_touches) = app.state::<notif::Notifications>().raccourcis_sos();
+            if sos_actif {
+                if let Err(e) = raccourcis::appliquer(app.handle(), true, &sos_touches) {
                     eprintln!("[raccourcis] {e}");
                 }
             }

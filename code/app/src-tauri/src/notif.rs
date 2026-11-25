@@ -35,11 +35,13 @@ pub struct Reglages {
     pub carte: bool,
     /// SOS au clavier : Ctrl + Maj + 1…6, deux appuis (raccourcis.rs). Faux par défaut.
     pub raccourcis_sos: bool,
+    /// Combinaisons choisies par le membre, par type de SOS (`combat` → « F13 »…). Absent = Ctrl + Maj + chiffre.
+    pub touches_sos: std::collections::BTreeMap<String, String>,
 }
 
 impl Default for Reglages {
     fn default() -> Self {
-        Reglages { lancements: true, defcon: true, bandeau: true, portail: true, discord: true, carte: true, raccourcis_sos: false }
+        Reglages { lancements: true, defcon: true, bandeau: true, portail: true, discord: true, carte: true, raccourcis_sos: false, touches_sos: Default::default() }
     }
 }
 
@@ -58,8 +60,9 @@ pub struct EtatDefcon {
 impl Notifications {
     /// Rich Presence voulue par le membre (réglage `discord`).
     /// SOS au clavier activé ?
-    pub fn raccourcis_sos(&self) -> bool {
-        self.reglages.lock().unwrap().raccourcis_sos
+    pub fn raccourcis_sos(&self) -> (bool, std::collections::BTreeMap<String, String>) {
+        let r = self.reglages.lock().unwrap();
+        (r.raccourcis_sos, r.touches_sos.clone())
     }
 
     pub fn discord_actif(&self) -> bool {
@@ -304,10 +307,6 @@ fn boucle(app: tauri::AppHandle, cache: PathBuf) {
                         }
                     }
                     Some("defcon") => appliquer_defcon(&notifs, p, true),
-                    // Messagerie native : relais à l'interface (le portail ne publie à ce compte que ce qu'il peut lire).
-                    Some(t @ ("message:new" | "message:update" | "message:delete" | "channels:changed")) => {
-                        let _ = app.emit_to(EventTarget::webview("main"), "chat-evenement", serde_json::json!({ "type": t, "payload": p }));
-                    }
                     // SOS : l'interface relit GET /api/sos (la notification Windows vient de notification:new).
                     Some("sos:update") => {
                         let _ = app.emit_to(EventTarget::webview("main"), "sos-evenement", p.clone());
@@ -343,8 +342,14 @@ pub fn notif_reglages(notifs: tauri::State<'_, Notifications>) -> Reglages {
 
 #[tauri::command]
 pub fn notif_reglages_ecrire(app: tauri::AppHandle, notifs: tauri::State<'_, Notifications>, reglages: Reglages) -> Result<(), String> {
-    if reglages.raccourcis_sos != notifs.reglages.lock().unwrap().raccourcis_sos {
-        crate::raccourcis::appliquer(&app, reglages.raccourcis_sos)?;
+    let (avant, touches_avant) = notifs.raccourcis_sos();
+    if reglages.raccourcis_sos != avant || reglages.touches_sos != touches_avant {
+        // Combinaisons vérifiées AVANT d'enregistrer : un réglage invalide n'est jamais gardé.
+        crate::raccourcis::combinaisons(&reglages.touches_sos)?;
+        if let Err(e) = crate::raccourcis::appliquer(&app, reglages.raccourcis_sos, &reglages.touches_sos) {
+            let _ = crate::raccourcis::appliquer(&app, avant, &touches_avant);
+            return Err(e);
+        }
     }
     crate::traduction::ecrire_sur(&notifs.fichier, serde_json::to_string(&reglages).map_err(|e| e.to_string())?.as_bytes()).map_err(|e| e.to_string())?;
     *notifs.reglages.lock().unwrap() = reglages.clone();

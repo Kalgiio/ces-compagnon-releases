@@ -1,7 +1,7 @@
 {
   "name": "ces-compagnon",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "CES Compagnon — application de bureau de l'organisation CES (outil de fans non affilié à Cloud Imperium Games)",
   "type": "module",
   "scripts": {

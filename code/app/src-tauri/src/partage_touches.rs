@@ -1,8 +1,8 @@
 //! Partage des profils de touches entre membres (feuille de route § 2, décision du CES n° 4 : l'auteur choisit
 //! « tous les membres CES » ou « membres désignés »). Contrat : `API.md` § 5 ter.
 //!
-//! - Publier : le profil actuel (ou une sauvegarde) part au portail — c'est le fichier natif du jeu, qui ne contient
-//!   que des noms d'actions et de touches (aucune donnée personnelle).
+//! - Publier : le profil actuel (ou une sauvegarde) part au portail RÉDUIT aux seules touches modifiées
+//!   (`touches::minimal`) : ni noms ni identifiants des appareils, ni réglages d'appareil.
 //! - Récupérer un profil partagé : il devient une SAUVEGARDE locale ; rien n'est appliqué au jeu sans « Restaurer ».
 
 use crate::portail::{self, Erreur};
@@ -64,7 +64,9 @@ pub fn touches_publier(
         Some(n) => touches::fichier_sauvegarde(&dossiers, &n)?,
         None => touches::chemin_profil(&dossier_jeu.ok_or("Dossier du jeu introuvable.")?),
     };
-    let xml = std::fs::read_to_string(&source).map_err(|_| "Profil de touches introuvable.".to_string())?;
+    let complet = std::fs::read_to_string(&source).map_err(|_| "Profil de touches introuvable.".to_string())?;
+    // Moindre privilège : seules les touches modifiées partent, sans identifiant matériel ni réglage d'appareil.
+    let xml = touches::minimal(&complet)?;
     if xml.len() > XML_MAX {
         return Err("Profil trop gros pour être partagé (256 Ko au plus).".into());
     }
